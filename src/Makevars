@@ -1,0 +1,62 @@
+$(info The compilation root directory is: $(ROOT_DIR))                          
+$(info The name of the shared library to be created is: $(SHLIB))               
+
+CXX_STD = CXX11
+PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -Wall -pedantic -pthread -fPIC -O2 -g -fPIC -I/usr/include/openssl -I./geometry -I./geometry/base -I./geometry/s2 -I./geometry/strings -I./geometry/util/coding -I./geometry/util/endian -I./geometry/util/hash -I./geometry/util/math/exactfloat -I./geometry/util/math 
+PKG_LIBS=-L./ -ls2_main
+LIBS=-L./
+
+SOURCES= interval_test.cpp
+OBJECTS= $(SOURCES:.cpp=.o)
+
+SOURCES_S2UTIL= \
+./geometry/base/int128.cc \
+./geometry/base/logging.cc \
+./geometry/base/stringprintf.cc \
+./geometry/base/strtoint.cc \
+./geometry/strings/ascii_ctype.cc \
+./geometry/strings/split.cc \
+./geometry/strings/stringprintf.cc \
+./geometry/strings/strutil.cc \
+./geometry/util/coding/coder.cc \
+./geometry/util/coding/varint.cc \
+./geometry/util/hash/hash.cc \
+./geometry/util/math/exactfloat/exactfloat.cc \
+./geometry/util/math/mathlimits.cc \
+./geometry/util/math/mathutil.cc
+OBJECTS_S2UTIL = $(SOURCES_S2UTIL:.cc=.o)
+
+SOURCES_S2CELLID= \
+./geometry/s1angle.cc \
+./geometry/s2.cc \
+./geometry/s2cellid.cc \
+./geometry/s2latlng.cc
+OBJECTS_S2CELLID = $(SOURCES_S2CELLID:.cc=.o)
+
+SOURCES_S2= \
+./geometry/s1interval.cc \
+./geometry/s2cap.cc \
+./geometry/s2cell.cc \
+./geometry/s2cellunion.cc \
+./geometry/s2edgeindex.cc \
+./geometry/s2edgeutil.cc \
+./geometry/s2latlngrect.cc \
+./geometry/s2loop.cc \
+./geometry/s2pointregion.cc \
+./geometry/s2polygon.cc \
+./geometry/s2polygonbuilder.cc \
+./geometry/s2polyline.cc \
+./geometry/s2r2rect.cc \
+./geometry/s2region.cc \
+./geometry/s2regioncoverer.cc \
+./geometry/s2regionintersection.cc \
+./geometry/s2regionunion.cc
+OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
+ 
+all: $(SHLIB) libs2_main.a
+
+$(SHLIB): $(OBJECTS) libs2_main.a
+
+./libs2_main.a: $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2)
+	ar -rvs libs2_main.a $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2)
+

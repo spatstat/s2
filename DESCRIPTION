@@ -1,0 +1,11 @@
+Package: s2
+Type: Package
+Title: Google's s2 library for geometry on the sphere
+Version: 0.1
+Date: 2016-07-19
+Authors@R: c(
+    person('Ege', 'Rubak', email='rubak@math.aau.dk', role = c('aut', 'cre'))
+    )
+Description: R bindings for Google's s2 library for geometric calculations on the sphere.
+License: GPL (>= 2)
+SystemRequirements: OpenSSL >= 1.0.0, cmake >= 3.1

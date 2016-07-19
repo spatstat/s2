@@ -1,0 +1,4 @@
+useDynLib(s2,
+"interval_test_c")
+
+export("interval_test")
