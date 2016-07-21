@@ -1,0 +1,17 @@
+# Based on https://github.com/forexample/rcpp-test/blob/master/configure
+cd src/geometry
+set -x
+set -e
+
+which cmake
+
+rm -rf _builds
+
+cmake -H. -B_builds \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
+    -DCMAKE_INSTALL_PREFIX=_install \
+    -DCMAKE_SHARED_LIBRARY_PREFIX_CXX=""
+
+cmake --build _builds --target install 
+
+cp _install/lib/s2.so ../ || echo "Failed: s2.so -> .."
