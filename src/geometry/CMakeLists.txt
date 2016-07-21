@@ -2,9 +2,15 @@ project(s2 CXX)
 set(PROJECT_NAME s2)
 set(PROJECT_VERSION 0.1.0)
 cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
-add_definitions(-DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG)
+add_definitions(-DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -fPIC)
 set_property(GLOBAL PROPERTY CXX_STANDARD 11)
 set_property(GLOBAL PROPERTY CXX_STANDARD_REQUIRED ON)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../../cmake/modules")
+
+find_package(LibR REQUIRED)
+message("R libraries: ${LIBR_LIBRARIES}")
+message("R include dirs: ${LIBR_INCLUDE_DIRS}")
 
 find_package(OpenSSL REQUIRED)
 
@@ -12,6 +18,7 @@ include_directories(
 	s2
 	.
 	${OPENSSL_INCLUDE_DIR}
+	${LIBR_INCLUDE_DIRS}
 )
 
 set(s2util_files
@@ -56,6 +63,7 @@ set(s2_files
 	s2regioncoverer.cc
 	s2regionintersection.cc
 	s2regionunion.cc
+	../interval_test.cpp
 )
 
 set(s2includes
@@ -136,10 +144,10 @@ set(s2includes_util_math
 	util/math/vector4-inl.h
 )
 
-add_library(s2util SHARED ${s2util_files})
+add_library(s2util STATIC ${s2util_files})
 target_link_libraries(s2util ${OPENSSL_LIBRARIES})
 
-add_library(s2cellid SHARED ${s2cellid_files})
+add_library(s2cellid STATIC ${s2cellid_files})
 target_link_libraries(s2cellid s2util)
 
 add_library(s2 SHARED ${s2_files})
