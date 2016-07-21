@@ -14,6 +14,5 @@ Using the `cmake` branch we have succeeded in building a working R package on Ub
 Forthcoming tasks:
 
 - Make the basic library compile into a working R package on Linux, OSX and Windows.
--
+
 - Use [Rcpp](http://cran.r-project.org/package=Rcpp) to interface the library either via external pointers or RcppModule.
--
