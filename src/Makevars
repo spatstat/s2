@@ -2,12 +2,9 @@ $(info The compilation root directory is: $(ROOT_DIR))
 $(info The name of the shared library to be created is: $(SHLIB))               
 
 CXX_STD = CXX11
-PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -Wall -pedantic -pthread -fPIC -O2 -g -fPIC -I/usr/include/openssl -I./geometry -I./geometry/base -I./geometry/s2 -I./geometry/strings -I./geometry/util/coding -I./geometry/util/endian -I./geometry/util/hash -I./geometry/util/math/exactfloat -I./geometry/util/math 
-PKG_LIBS=-L./ -ls2_main
+PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -Wall -pedantic -pthread -fPIC -O2 -g -I/usr/include/openssl -I./geometry -I./geometry/s2
+PKG_LIBS=-L./ -lssl -lcrypto -lpthread
 LIBS=-L./
-
-SOURCES= interval_test.cpp
-OBJECTS= $(SOURCES:.cpp=.o)
 
 SOURCES_S2UTIL= \
 ./geometry/base/int128.cc \
@@ -53,10 +50,6 @@ SOURCES_S2= \
 ./geometry/s2regionunion.cc
 OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
  
-all: $(SHLIB) libs2_main.a
-
-$(SHLIB): $(OBJECTS) libs2_main.a
-
-./libs2_main.a: $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2)
-	ar -rvs libs2_main.a $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2)
+SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) interval_test.cpp
+OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) interval_test.o
 
