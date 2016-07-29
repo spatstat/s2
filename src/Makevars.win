@@ -1,0 +1,57 @@
+PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -D_USE_MATH_DEFINES -DHASH_NAMESPACE=std -DNDEBUG -pedantic -pthread -std=gnu++11 -O2 -g -I../windows/openssl-1.0.2d/include -I./geometry -I./geometry/s2
+PKG_LIBS=-L../windows/openssl-1.0.2d/lib${R_ARCH} -lssl -lcrypto
+
+SOURCES_S2UTIL= \
+./geometry/base/int128.cc \
+./geometry/base/logging.cc \
+./geometry/base/stringprintf.cc \
+./geometry/base/strtoint.cc \
+./geometry/strings/ascii_ctype.cc \
+./geometry/strings/split.cc \
+./geometry/strings/stringprintf.cc \
+./geometry/strings/strutil.cc \
+./geometry/util/coding/coder.cc \
+./geometry/util/coding/varint.cc \
+./geometry/util/hash/hash.cc \
+./geometry/util/math/exactfloat/exactfloat.cc \
+./geometry/util/math/mathlimits.cc \
+./geometry/util/math/mathutil.cc
+OBJECTS_S2UTIL = $(SOURCES_S2UTIL:.cc=.o)
+
+SOURCES_S2CELLID= \
+./geometry/s1angle.cc \
+./geometry/s2.cc \
+./geometry/s2cellid.cc \
+./geometry/s2latlng.cc
+OBJECTS_S2CELLID = $(SOURCES_S2CELLID:.cc=.o)
+
+SOURCES_S2= \
+./geometry/s1interval.cc \
+./geometry/s2cap.cc \
+./geometry/s2cell.cc \
+./geometry/s2cellunion.cc \
+./geometry/s2edgeindex.cc \
+./geometry/s2edgeutil.cc \
+./geometry/s2latlngrect.cc \
+./geometry/s2loop.cc \
+./geometry/s2pointregion.cc \
+./geometry/s2polygon.cc \
+./geometry/s2polygonbuilder.cc \
+./geometry/s2polyline.cc \
+./geometry/s2r2rect.cc \
+./geometry/s2region.cc \
+./geometry/s2regioncoverer.cc \
+./geometry/s2regionintersection.cc \
+./geometry/s2regionunion.cc
+OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
+ 
+SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) interval_test.cpp
+OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) interval_test.o
+
+all: winlibs
+
+clean:
+	rm -f s2.dll $(OBJECTS)
+
+winlibs:
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
