@@ -1,0 +1,11 @@
+.git
+.gitignore
+.Rhistory
+.travis.yml
+^.*\.Rproj$
+^\.Rproj\.user$
+^src/Makevars$
+^src/s2.dll$
+^vignettes/figure
+README.md
+windows
