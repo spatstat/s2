@@ -2,8 +2,8 @@ $(info The compilation root directory is: $(ROOT_DIR))
 $(info The name of the shared library to be created is: $(SHLIB))               
 
 CXX_STD = CXX11
-PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -Wall -pedantic -pthread -fPIC -O2 -g -I/usr/include/openssl -I./geometry -I./geometry/s2
-PKG_LIBS=-L./ -lssl -lcrypto -lpthread
+PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -Wall -pedantic -pthread -fPIC -O2 -g -I./geometry -I./geometry/s2 @cflags@
+PKG_LIBS=-L./ @libs@ -lpthread
 LIBS=-L./
 
 SOURCES_S2UTIL= \
