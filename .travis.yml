@@ -1,0 +1,12 @@
+language: r
+cache: packages
+
+addons:
+  apt:
+    packages:
+    - libssl-dev
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
