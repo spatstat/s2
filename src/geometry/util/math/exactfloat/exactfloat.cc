@@ -11,8 +11,10 @@ using std::max;
 using std::swap;
 using std::reverse;
 using std::signbit;
-using std::isnan;
-using std::isinf;
+#ifdef WIN32
+using std::isnan
+using std::isinf
+#endif
 
 #include <limits>
 using std::numeric_limits;
