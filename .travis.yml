@@ -1,10 +1,17 @@
 language: r
 cache: packages
 
+os:
+- linux
+- osx
+
 addons:
   apt:
     packages:
     - libssl-dev
+
+brew_packages:
+- openssl
 
 notifications:
   email:
