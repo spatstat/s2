@@ -9,3 +9,4 @@
 ^vignettes/figure
 README.md
 windows
+^appveyor\.yml$
