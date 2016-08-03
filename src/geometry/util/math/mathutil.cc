@@ -62,8 +62,17 @@ bool MathUtil::RealRootsForCubic(long double const a,
     return true;
   }
 
+// https://github.com/mongodb/mongo/commit/3fe2d4fb37cce8259991f7af8b58d67b357af84e
+// Disable error about fabs causing truncation of value because
+// it takes a double instead of a long double (Clang 3.5+)
+// See SERVER-15183
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wabsolute-value"
+
   long double const A =
     -sgn(R) * pow(fabs(R) + sqrt(R_squared - Q_cubed), 1.0/3.0L);
+
+#pragma clang diagnostic pop
 
   if (A != 0.0) {  // in which case, B from NR is zero
     *r1 = A + Q / A - a_third;
