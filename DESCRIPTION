@@ -8,4 +8,5 @@ Authors@R: c(
     )
 Description: R bindings for Google's s2 library for geometric calculations on the sphere.
 License: GPL (>= 2)
-SystemRequirements: OpenSSL >= 1.0.0, cmake >= 3.1
+SystemRequirements: OpenSSL >= 1.0.0
+LinkingTo: Rcpp

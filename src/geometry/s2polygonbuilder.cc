@@ -13,7 +13,6 @@ using std::setprecision;
 
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
 
 #include <map>
@@ -126,22 +125,22 @@ void S2PolygonBuilder::set_debug_matrix(Matrix3x3_d const& m) {
 void S2PolygonBuilder::DumpVertex(S2Point const& v) const {
   if (debug_matrix_.get()) {
     // For orthonormal matrices, Inverse() == Transpose().
-    cout << S2LatLng(debug_matrix_->Transpose() * v);
+    Rcpp::Rcout << S2LatLng(debug_matrix_->Transpose() * v);
   } else {
-    cout << setprecision(17) << v << setprecision(6);
+    Rcpp::Rcout << setprecision(17) << v << setprecision(6);
   }
 }
 
 void S2PolygonBuilder::DumpEdges(S2Point const& v0) const {
   DumpVertex(v0);
-  cout << ":\n";
+  Rcpp::Rcout << ":\n";
   EdgeSet::const_iterator candidates = edges_->find(v0);
   if (candidates != edges_->end()) {
     VertexSet const& vset = candidates->second;
     for (VertexSet::const_iterator i = vset.begin(); i != vset.end(); ++i) {
-      cout << "    ";
+      Rcpp::Rcout << "    ";
       DumpVertex(*i);
-      cout << "\n";
+      Rcpp::Rcout << "\n";
     }
   }
 }

@@ -14,10 +14,11 @@
 #ifndef BASE_LOGGING_H
 #define BASE_LOGGING_H
 
+#include <Rcpp.h>
+
 #include <stdlib.h>
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
 
 #include "base/macros.h"
@@ -83,11 +84,11 @@ class DateLogger {
 class LogMessage {
  public:
   LogMessage(const char* file, int line) {
-    std::cerr << "[" << pretty_date_.HumanDate() << "] "
+    Rcpp::Rcerr << "[" << pretty_date_.HumanDate() << "] "
               << file << ":" << line << ": ";
   }
-  ~LogMessage() { std::cerr << "\n"; }
-  std::ostream& stream() { return std::cerr; }
+  ~LogMessage() { Rcpp::Rcerr << "\n"; }
+  std::ostream& stream() { return Rcpp::Rcerr; }
 
  private:
   google_base::DateLogger pretty_date_;
@@ -99,8 +100,8 @@ class LogMessageFatal : public LogMessage {
   LogMessageFatal(const char* file, int line)
     : LogMessage(file, line) { }
   ~LogMessageFatal() {
-    std::cerr << "\n";
-    abort();
+    Rcpp::Rcerr << "\n";
+    Rcpp::stop("An error has occured in the C++ library!");
   }
  private:
   DISALLOW_COPY_AND_ASSIGN(LogMessageFatal);

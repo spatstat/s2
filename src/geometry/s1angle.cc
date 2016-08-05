@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
 
 #include "s1angle.h"

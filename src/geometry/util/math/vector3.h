@@ -11,7 +11,6 @@
 
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
   // NOLINT(readability/streams)
 #include "base/basictypes.h"

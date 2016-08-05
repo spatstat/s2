@@ -7,7 +7,6 @@
 
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
 
 #include "base/integral_types.h"

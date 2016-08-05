@@ -20,7 +20,6 @@
 #define UTIL_MATH_MATRIX3X3_INL_H__
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
 
 

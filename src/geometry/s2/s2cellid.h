@@ -5,7 +5,6 @@
 
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
 
 #include <string>

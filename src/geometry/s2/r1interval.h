@@ -13,7 +13,6 @@ using std::reverse;
 
 #include <iostream>
 using std::ostream;
-using std::cout;
 using std::endl;
 
 #include "base/basictypes.h"
