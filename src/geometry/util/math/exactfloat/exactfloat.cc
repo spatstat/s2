@@ -12,8 +12,8 @@ using std::swap;
 using std::reverse;
 using std::signbit;
 #ifdef WIN32
-using std::isnan;
-using std::isinf;
+using std::isnan
+using std::isinf
 #endif
 
 #include <limits>
