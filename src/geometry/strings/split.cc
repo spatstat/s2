@@ -117,22 +117,22 @@ HASH_TO((intptr_t c),  static_cast<uint32>(Hash64NumWithSeed(c, MIX64) >> 32))
 // HASH_NAMESPACE_DECLARATION_START
 namespace std {
 
-#if defined(__GNUC__)
-// Use our nice hash function for strings
-template<class _CharT, class _Traits, class _Alloc>
-struct hash<basic_string<_CharT, _Traits, _Alloc> > {
-  size_t operator()(const basic_string<_CharT, _Traits, _Alloc>& k) const {
-    return HashTo32(k.data(), static_cast<uint32>(k.length()));
-  }
-};
-
-// they don't define a hash for const string at all
-template<> struct hash<const string> {
-  size_t operator()(const string& k) const {
-    return HashTo32(k.data(), static_cast<uint32>(k.length()));
-  }
-};
-#endif  // __GNUC__
+// #if defined(__GNUC__)
+// // Use our nice hash function for strings
+// template<class _CharT, class _Traits, class _Alloc>
+// struct hash<basic_string<_CharT, _Traits, _Alloc> > {
+//   size_t operator()(const basic_string<_CharT, _Traits, _Alloc>& k) const {
+//     return HashTo32(k.data(), static_cast<uint32>(k.length()));
+//   }
+// };
+// 
+// // they don't define a hash for const string at all
+// template<> struct hash<const string> {
+//   size_t operator()(const string& k) const {
+//     return HashTo32(k.data(), static_cast<uint32>(k.length()));
+//   }
+// };
+// #endif  // __GNUC__
 
 // MSVC's STL requires an ever-so slightly different decl
 #if defined STL_MSVC
