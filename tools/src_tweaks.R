@@ -86,6 +86,14 @@ content[ii] <- '  snprintf(buffer_, sizeof(buffer_), "%02d:%02d:%02d",'
 writeLines(content, file)
 #################################################
 
+#### GIT: Fix isnan and isinf problem on Windows ####
+file <- file.path("util", "math", "exactfloat", "exactfloat.cc")
+content <- readLines(file)
+content <- gsub("isnan", "std::isnan", content)
+content <- gsub("isinf", "std::isinf", content)
+writeLines(content, file)
+######################################################
+
 ########### GIT: hash_map and hash_set ##############
 system("git grep -l 'namespace __gnu_cxx' | xargs sed -i 's/namespace __gnu_cxx/namespace std/g'")
 files <- system("git grep -l '<hash_...>'", intern = TRUE)
