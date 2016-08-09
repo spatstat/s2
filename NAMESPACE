@@ -1,4 +1,3 @@
-useDynLib(s2,
-"interval_test_c")
-
+useDynLib(s2)
 export("interval_test")
+importFrom(Rcpp, evalCpp)
