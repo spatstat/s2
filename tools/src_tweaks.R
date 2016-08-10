@@ -33,8 +33,10 @@ writeLines(content, file)
 ##################################################
 
 ### GIT: Change drem() to remainder() in geometry C++ source code ###
-system("git grep -l 'drem' | xargs sed -i 's/drem/remainder/g'")
+system("git grep -l 'drem' | grep 'cc$' | xargs sed -i 's/drem/remainder/g'")
 #####################################################################
+
+system("sed -i 's/\* children\[0\]/** children/g' s2/s2regioncoverer.h")
 
 ##### GIT: Disable warning for fabs() on clang. ######
 ## mathutil.cc
