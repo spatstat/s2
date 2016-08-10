@@ -56,5 +56,5 @@ OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) interval_test.o Rcp
 all: $(SHLIB) ../inst/libs2_main.a
 
 ../inst/libs2_main.a: $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2)
-	ar -rvs ../inst/libs2_main.a
-
+	ar -rvs ../inst/libs2_main.a  $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2)
+	
