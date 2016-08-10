@@ -53,3 +53,8 @@ OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
 SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) interval_test.cpp RcppExports.cpp
 OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) interval_test.o RcppExports.o
 
+all: $(SHLIB) ../inst/libs2_main.a
+
+../inst/libs2_main.a: $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2)
+	ar -rvs ../inst/libs2_main.a
+
