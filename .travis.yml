@@ -1,19 +1,28 @@
 language: r
 cache: packages
-
 os:
 - linux
 - osx
-
 addons:
   apt:
     packages:
     - libssl-dev
-
 brew_packages:
 - openssl
-
 notifications:
   email:
     on_success: change
     on_failure: change
+after_success:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R CMD INSTALL --build $PKG_TARBALL; fi
+deploy:
+  provider: releases
+  api_key:
+    secure: VxhYGABfUHTW0kM2FNIXoKdhZ0/eaLzqNljJB4z5DMbJ4z0qM0iMlb/ZzwcLMsRs3h6isYXjS3PEWnzQMNKcdEcj42YRBAz/ULTJqGUbcCoGN2WnnEoQzD6ByrgFNY5d2aSMnz3zg251iFo2DbcKXeQX9xGRw9lMiepBPn3G8PblkQXsQqVJJgik9vwKPKQXVqPI2PGXDzs9wKNDQ8ipK1lhaFCN+5zNEXmtBQcqR6awHMlujSVWrvohZAHSJatvJ0VKRQ/E+dJcQ9f89g6WDI3QyfxoLzR4NCTCpy3tH2bS8uixHVgRtoaXwdvSGkm+iZlfz2pr8F7ptjWy6jMc5v+4gIameg9d3kH+X71a/xZT4Er5P7MGNC+dvuhfS4L5MJjiO4oHwTk1g2bLGj+zdgmgpoRhp+rofD1tS8CmNmq6GqJ4xXYezX+dhyeq7Zl3F9wixUFHcuDBgqAlM64wdcfYjW166jAjauXy3PlAxjhBNK+O4fXJYk1fYg4G5TBqOP2pF8j5bN3WAMjAh+t+yCl8gUwGbqKZ+5mdlxo/Ljl1kKqTWYnScTtpBgUCCQ0REJZlNrdLF+gGPNkIeTV0vvRo3/VE1LT3pTsA9jMKVjOStKToHCEpFSdTYxylIxXLbhdhoBfd39Tuo1GLg4W62YHqzmR4qUUOJ9O8DgY4W1c=
+  skip_cleanup: true
+  file_glob: true
+  file: s2_*.t*gz
+  on:
+    repo: spatstat/s2
+    tags: true
+    condition: "$TRAVIS_R_VERSION != devel && ($TRAVIS_OS_NAME == osx)"
