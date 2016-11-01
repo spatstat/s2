@@ -45,8 +45,8 @@ SOURCES_S2= \
 ./geometry/s2regionunion.cc
 OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
  
-SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) interval_test.cpp RcppExports.cpp
-OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) interval_test.o RcppExports.o
+SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) cell_center.cpp RcppExports.cpp
+OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) cell_center.o RcppExports.o
 
 all: winlibs
 
