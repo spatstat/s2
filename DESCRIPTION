@@ -1,8 +1,8 @@
 Package: s2
 Type: Package
-Title: Google's s2 library for geometry on the sphere
+Title: Google's S2 Library for Geometry on the Sphere
 Version: 0.1
-Date: 2016-07-19
+Date: 2016-11-02
 Authors@R: c(
     person('Ege', 'Rubak', email='rubak@math.aau.dk', role = c('aut', 'cre'))
     )
