@@ -2,17 +2,10 @@ language: r
 r:
 - release
 - devel
-sudo: false
 cache: packages
 os:
 - linux
 - osx
-addons:
-  apt:
-    packages:
-    - libssl-dev
-brew_packages:
-- openssl
 notifications:
   email:
     on_success: change
