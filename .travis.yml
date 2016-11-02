@@ -1,4 +1,8 @@
 language: r
+r:
+- release
+- devel
+sudo: false
 cache: packages
 os:
 - linux
@@ -13,8 +17,8 @@ notifications:
   email:
     on_success: change
     on_failure: change
-after_success:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then R CMD INSTALL --build $PKG_TARBALL; fi
+before_deploy:
+- if [[ "$TRAVIS_R_VERSION" != "devel" && ("$TRAVIS_OS_NAME" == "osx") ]]; then R CMD INSTALL --build $PKG_TARBALL; fi
 deploy:
   provider: releases
   api_key:
