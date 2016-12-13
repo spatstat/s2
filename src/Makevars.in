@@ -2,9 +2,9 @@ $(info The compilation root directory is: $(ROOT_DIR))
 $(info The name of the shared library to be created is: $(SHLIB))               
 
 CXX_STD = CXX11
-PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -pthread -I./geometry -I./geometry/s2 @cxx1xflags@
-PKG_LIBS=-L./ @libs@ -lpthread
-LIBS=-L./
+PKG_CPPFLAGS = -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -I./geometry -I./geometry/s2
+PKG_LIBS = @libs@
+PKG_CXXFLAGS = @cxxflags@ -pthread
 
 SOURCES_S2UTIL= \
 ./geometry/base/int128.cc \

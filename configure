@@ -12,23 +12,23 @@ PKG_CSW_NAME="libssl_dev"
 PKG_BREW_NAME="openssl"
 PKG_TEST_FILE="tools/version.c"
 PKG_LIBS="-lssl -lcrypto"
-PKG_CXX1XFLAGS=""
+PKG_CXXFLAGS=""
 
 # Use pkg-config if available
 pkg-config ${PKG_CONFIG_NAME} --atleast-version=1.0  2>/dev/null
 if [ $? -eq 0 ]; then
-  PKGCONFIG_CXX1XFLAGS=`pkg-config --cflags ${PKG_CONFIG_NAME}`
+  PKGCONFIG_CXXFLAGS=`pkg-config --cflags ${PKG_CONFIG_NAME}`
   PKGCONFIG_LIBS=`pkg-config --libs ${PKG_CONFIG_NAME}`
 fi
 
 # Note that cflags may be empty in case of success
 if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   echo "Found INCLUDE_DIR and/or LIB_DIR!"
-  PKG_CXX1XFLAGS="-I$INCLUDE_DIR $PKG_CXX1XFLAGS"
+  PKG_CXXFLAGS="-I$INCLUDE_DIR $PKG_CXXFLAGS"
   PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
-elif [ "$PKGCONFIG_CXX1XFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
+elif [ "$PKGCONFIG_CXXFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
   echo "Found pkg-config cflags and libs!"
-  PKG_CXX1XFLAGS=${PKGCONFIG_CXX1XFLAGS}
+  PKG_CXXFLAGS=${PKGCONFIG_CXXFLAGS}
   PKG_LIBS=${PKGCONFIG_LIBS}
 else
   case "$OSTYPE" in "darwin"*)
@@ -44,7 +44,7 @@ else
     HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install --force-bottle $PKG_BREW_NAME 2>&1 | perl -pe 's/Warning/Note/gi'
     rm -f $BREWDIR/opt/$PKG_BREW_NAME/lib/*.dylib
   fi
-  PKG_CXX1XFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include"
+  PKG_CXXFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include"
   PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
   ;;
   esac
@@ -52,10 +52,10 @@ fi
 
 # Add PIC flag for shared lib
 # CXX1XPICFLAGS=`${R_HOME}/bin/R CMD config CXX1XPICFLAGS`
-# PKG_CXX1XFLAGS="$PKG_CXX1XFLAGS $CXX1XPICFLAGS"
+# PKG_CXXFLAGS="$PKG_CXXFLAGS $CXX1XPICFLAGS"
 
 # For debugging
-echo "Using PKG_CXX1XFLAGS=$PKG_CXX1XFLAGS"
+echo "Using PKG_CXXFLAGS=$PKG_CXXFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
 # Find compiler
@@ -64,7 +64,7 @@ CXX1XFLAGS=`${R_HOME}/bin/R CMD config CXX1XFLAGS`
 CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 
 # Test configuration
-${CXX1X} ${CPPFLAGS} ${PKG_CXX1XFLAGS} ${CXX1XFLAGS} -E ${PKG_TEST_FILE} >/dev/null 2>&1
+${CXX1X} ${CPPFLAGS} ${PKG_CXXFLAGS} ${CXX1XFLAGS} -E ${PKG_TEST_FILE} >/dev/null 2>&1
 
 # Customize the error
 if [ $? -ne 0 ]; then
@@ -83,7 +83,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Write to Makevars
-sed -e "s|@cxx1xflags@|$PKG_CXX1XFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
+sed -e "s|@cxxflags@|$PKG_CXXFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
 # Success
 exit 0
