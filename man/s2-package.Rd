@@ -4,7 +4,7 @@
 \name{s2-package}
 \alias{s2}
 \alias{s2-package}
-\title{Google's s2 library for geometry on the sphere}
+\title{Google's S2 Library for Geometry on the Sphere}
 \description{
 R bindings for Google's s2 library for geometric calculations on
 the sphere.

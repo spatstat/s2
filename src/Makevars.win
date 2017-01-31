@@ -46,8 +46,13 @@ SOURCES_S2= \
 ./geometry/s2regionunion.cc
 OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
  
-SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) cell_center.cpp RcppExports.cpp
-OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) cell_center.o RcppExports.o
+SOURCES_RCPP= \
+./rcpp_module_s2polygon.cpp \
+./RcppExports.cpp
+OBJECTS_RCPP = $(SOURCES_RCPP:.cpp=.o)
+
+SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) $(SOURCES_RCPP)
+OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) $(OBJECTS_RCPP)
 
 all: winlibs
 

@@ -5,15 +5,14 @@
 
 using namespace Rcpp;
 
-// cell_center
-Rcpp::NumericVector cell_center(double lat, double lng);
-RcppExport SEXP s2_cell_center(SEXP latSEXP, SEXP lngSEXP) {
+// S2Point_coords
+Rcpp::NumericVector S2Point_coords(SEXP p);
+RcppExport SEXP s2_S2Point_coords(SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type lat(latSEXP);
-    Rcpp::traits::input_parameter< double >::type lng(lngSEXP);
-    rcpp_result_gen = Rcpp::wrap(cell_center(lat, lng));
+    Rcpp::traits::input_parameter< SEXP >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Point_coords(p));
     return rcpp_result_gen;
 END_RCPP
 }
