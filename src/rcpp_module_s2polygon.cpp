@@ -19,6 +19,10 @@ template <> SEXP wrap(const S2Point &p);
 namespace Rcpp {
 
 template <> S2Point as(SEXP x) {
+  if( Rf_isNumeric(x) ){
+    Rcpp::NumericVector coord(x);
+    return S2Point(coord[0], coord[1], coord[2]);
+  } 
   Rcpp::XPtr<S2Point> ptr(x);
   return *ptr;
 }
@@ -47,16 +51,22 @@ template <> SEXP wrap(const S2Point &p){
 }
 }
 
+S2LatLng S2LatLngFromDegrees(S2LatLng* x, double lat_degrees, double lng_degrees) {
+  return S2LatLng::FromDegrees(lat_degrees, lng_degrees);
+}
+
 //[[Rcpp::export]]
 Rcpp::NumericVector S2Point_coords(SEXP p) {
-  Rcpp::XPtr<S2Point> ptr(p);
+  S2Point x = Rcpp::as<S2Point>(p);
   Rcpp::NumericVector rslt(3);
-  rslt[0] = ptr->x();
-  rslt[1] = ptr->y();
-  rslt[2] = ptr->z();
+  rslt[0] = x.x();
+  rslt[1] = x.y();
+  rslt[2] = x.z();
   return rslt;
 }
 
+RCPP_EXPOSED_CLASS(S1Angle);
+RCPP_EXPOSED_CLASS(S2LatLng);
 RCPP_EXPOSED_CLASS(S2Loop);
 RCPP_EXPOSED_CLASS(S2Polygon);
 RCPP_EXPOSED_CLASS(S2PolygonBuilder);
@@ -64,6 +74,21 @@ RCPP_EXPOSED_CLASS(S2PolygonBuilderOptions);
 
 RCPP_MODULE(S2Polygon_module){
   using namespace Rcpp;
+  
+  class_<S1Angle>("S1Angle")
+  .constructor()
+  .constructor<S2Point,S2Point>()
+  .method("degrees", &S1Angle::degrees)
+  // .method("Degrees", &S1Angle::Degrees)
+  ;
+  
+  class_<S2LatLng>("S2LatLng")
+  .constructor()
+  .constructor<S1Angle,S1Angle>()
+  // .method("Invalid", &S2LatLng::Invalid)
+  .method("FromDegrees", &S2LatLngFromDegrees)
+  .method("ToPoint", &S2LatLng::ToPoint)
+  ;
   
   class_<S2Loop>("S2Loop")
   .constructor()
