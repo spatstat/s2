@@ -1,0 +1,1 @@
+Rcpp::loadModule("S2Polygon_module", TRUE)
