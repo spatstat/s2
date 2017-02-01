@@ -79,13 +79,11 @@ RCPP_MODULE(S2Polygon_module){
   .constructor()
   .constructor<S2Point,S2Point>()
   .method("degrees", &S1Angle::degrees)
-  // .method("Degrees", &S1Angle::Degrees)
   ;
   
   class_<S2LatLng>("S2LatLng")
   .constructor()
   .constructor<S1Angle,S1Angle>()
-  // .method("Invalid", &S2LatLng::Invalid)
   .method("FromDegrees", &S2LatLngFromDegrees)
   .method("ToPoint", &S2LatLng::ToPoint)
   ;
@@ -119,8 +117,4 @@ RCPP_MODULE(S2Polygon_module){
   class_<S2PolygonBuilderOptions>("S2PolygonBuilderOptions")
   .constructor()
   ;
-}
-
-RCPP_MODULE(test){
-  using namespace Rcpp;
 }
