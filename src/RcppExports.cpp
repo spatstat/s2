@@ -5,14 +5,25 @@
 
 using namespace Rcpp;
 
-// S2Point_coords
-Rcpp::NumericVector S2Point_coords(SEXP p);
-RcppExport SEXP s2_S2Point_coords(SEXP pSEXP) {
+// makepoly
+Rcpp::List makepoly(Rcpp::List x);
+RcppExport SEXP s2_makepoly(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(makepoly(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// latlng
+Rcpp::NumericVector latlng(SEXP p);
+RcppExport SEXP s2_latlng(SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(S2Point_coords(p));
+    rcpp_result_gen = Rcpp::wrap(latlng(p));
     return rcpp_result_gen;
 END_RCPP
 }
