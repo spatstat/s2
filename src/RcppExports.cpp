@@ -16,3 +16,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ll2point
+Rcpp::NumericVector ll2point(Rcpp::NumericVector p);
+RcppExport SEXP s2_ll2point(SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(ll2point(p));
+    return rcpp_result_gen;
+END_RCPP
+}

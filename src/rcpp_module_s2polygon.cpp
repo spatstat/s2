@@ -10,30 +10,53 @@ using std::vector;
 #include <string>
 
 namespace Rcpp {
-template<> S2Point as( SEXP ) ;
-template<> std::vector<S2Point> as( SEXP );
-template<> S2PolygonBuilder::EdgeList* as( SEXP ) ;
-template <> SEXP wrap(const S2Point &p);
-template <> SEXP wrap(const std::vector<S2Point> &p);
+  template<> std::vector<S2Point> as( SEXP );
+  template<> S2PolygonBuilder::EdgeList* as( SEXP ) ;
+  template <> SEXP wrap(const std::vector<S2Point> &p);
+  // namespace traits{
+  //   template <typename T> SEXP wrap(const Vector3<T> & obj);
+  //   template <typename T> class Exporter< Vector3<T> >;
+  // }
 }
 
 #include <Rcpp.h>
 
 namespace Rcpp {
 
-template <> S2Point as(SEXP x) {
-  if( Rf_isNumeric(x) ){
-    Rcpp::NumericVector coord(x);
-    if(coord.size() == 3){
-      return S2Point(coord[0], coord[1], coord[2]);
-    }
-    if(coord.size() == 2){
-      return S2LatLng::FromDegrees(coord[0], coord[1]).ToPoint();
-    }
-  } 
-  Rcpp::XPtr<S2Point> ptr(x);
-  return *ptr;
-}
+  // namespace traits {
+  // 
+  // // Defined wrap case
+  // template <typename T> SEXP wrap(const Vector3<T> & obj){
+  //   const int RTYPE = Rcpp::traits::r_sexptype_traits<T>::rtype ;
+  //   Rcpp::Vector< RTYPE > x(3);
+  //   x[0] = obj->x();
+  //   x[1] = obj->y();
+  //   x[2] = obj->z();
+  //   return x;
+  // };
+  // 
+  // // Defined as< > case
+  // template<typename T> class Exporter< Vector3<T> > {
+  // 
+  //   // Convert the type to a valid rtype. 
+  //   const static int RTYPE = Rcpp::traits::r_sexptype_traits< T >::rtype ;
+  //   Rcpp::Vector<RTYPE> vec;
+  //   
+  //   public:
+  //     Exporter(SEXP x) : vec(x) {
+  //       Rcout << TYPEOF(x) << " , " << RTYPE << std::endl;
+  //       if (TYPEOF(x) != RTYPE)
+  //         throw std::invalid_argument("Internal type error: Make sure you supply double. I.e. don't use integers like 1L or 1:2");
+  //     }
+  //     Vector3<T> get() {
+  //       
+  //       // Need to figure out a way to perhaps do a pointer pass?
+  //       Vector3<T> x(vec[0], vec[1], vec[2]);
+  //       
+  //       return x;
+  //     }
+  //   };
+  // }
 
 template<> std::vector<S2Point> as(SEXP x) {
 // Lat,lng supplied as data.frame
@@ -69,11 +92,6 @@ template<> std::vector<S2Point> as(SEXP x) {
 template <> S2PolygonBuilder::EdgeList* as(SEXP x) {
   S2PolygonBuilder::EdgeList* rslt;
   return rslt;
-}
-
-template <> SEXP wrap(const S2Point &p){
-  Rcpp::XPtr<S2Point> ptr( new S2Point(p), true );
-  return ptr;
 }
 
 template <> SEXP wrap(const std::vector<S2Point> &p){
@@ -117,6 +135,17 @@ Rcpp::NumericVector latlng(SEXP p) {
   return rslt;
 }
 
+//[[Rcpp::export]]
+Rcpp::NumericVector ll2point(Rcpp::NumericVector p) {
+  S2LatLng y = S2LatLng::FromDegrees(p[0], p[1]);
+  Rcpp::NumericVector rslt(3);
+  S2Point x = y.ToPoint();
+  rslt[0] = x.x();
+  rslt[1] = x.y();
+  rslt[2] = x.z();
+  return rslt;
+}
+
 bool S2Loop_IsValid(S2Loop* loop){
   return loop->IsValid();
 }
@@ -141,6 +170,7 @@ RCPP_EXPOSED_CLASS(S1Angle);
 RCPP_EXPOSED_CLASS(S2Cap);
 RCPP_EXPOSED_CLASS(S2LatLng);
 RCPP_EXPOSED_CLASS(S2Loop);
+RCPP_EXPOSED_CLASS_NODECL(S2Point);
 RCPP_EXPOSED_CLASS(S2Polygon);
 RCPP_EXPOSED_CLASS(S2PolygonBuilder);
 RCPP_EXPOSED_CLASS(S2PolygonBuilderOptions);
@@ -161,6 +191,13 @@ RCPP_MODULE(S2Polygon_module){
   .method("FromAxisArea", &S2Cap_FromAxisArea)
   ;
   
+  class_<S2Point>("S2Point")
+  .constructor()
+  .constructor<double,double,double>()
+  .constructor<int,int,int>()
+  .method("Fabs", &S2Point::Fabs)
+  ;
+
   class_<S1Angle>("S1Angle")
   .constructor()
   .constructor<S2Point,S2Point>()

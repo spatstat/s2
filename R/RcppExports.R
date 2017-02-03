@@ -5,3 +5,7 @@ latlng <- function(p) {
     .Call('s2_latlng', PACKAGE = 's2', p)
 }
 
+ll2point <- function(p) {
+    .Call('s2_ll2point', PACKAGE = 's2', p)
+}
+
