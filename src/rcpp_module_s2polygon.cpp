@@ -1,4 +1,6 @@
 #include <RcppCommon.h>
+#include "s2/s2cap.h"
+#include "s2/s2region.h"
 #include "s2/s2loop.h"
 #include "s2/s2polygon.h"
 #include "s2/s2polygonbuilder.h"
@@ -84,19 +86,6 @@ S2LatLng S2LatLngFromDegrees(S2LatLng* x, double lat_degrees, double lng_degrees
   return S2LatLng::FromDegrees(lat_degrees, lng_degrees);
 }
 
-// Rcpp::NumericMatrix latlng(SEXP p) {
-//   std::vector<S2Point> x = Rcpp::as<std::vector<S2Point>>(p);
-//   int n = x.size();
-//   Rcpp::NumericMatrix rslt(n,3);
-//   for(int i = 0; i < n; i++){
-//     rslt(i,0) = x[i].x();
-//     rslt(i,1) = x[i].y();
-//     rslt(i,2) = x[i].z();
-//   }
-//   return rslt;
-// }
-
-
 std::vector<std::string> dumploop(S2Loop* x){
   int n = x->num_vertices();
   std::vector<std::string> rslt(n);
@@ -119,50 +108,6 @@ Rcpp::DataFrame dumploop_numeric(S2Loop* x){
 }
 
 //[[Rcpp::export]]
-Rcpp::List makepoly(Rcpp::List x){
-  int n = x.size();
-  std::vector<S2Point> points;
-  // vector<S2Loop*>* loops;
-  S2PolygonBuilderOptions pbo;
-  S2PolygonBuilder pb(pbo);
-  bool tmp;
-  for(int i = 0; i < n; i++){
-    points = Rcpp::as<std::vector<S2Point>>(x[i]);
-    int m = points.size();
-    for(int j = 1; j < m; j++){
-      tmp = pb.AddEdge(points[j-1], points[j]);
-      if(!tmp){
-        // Rcpp::Rcout << S2LatLng(points[j]).ToStringInDegrees() << std::endl;
-        Rcpp::Rcout << "HIT("<< i << "," << j << "):" << S2LatLng(points[j-1]).ToStringInDegrees() << " to " << S2LatLng(points[j]).ToStringInDegrees() << std::endl;
-      }
-    }
-    // Rcpp::Rcout << "-------- Break -------" << std::endl;
-    // loops->push_back(new S2Loop(points));
-    // pb.AddLoop(loops[i]);
-  }
-  S2PolygonBuilder::EdgeList unused_edges;
-  S2Polygon poly;
-  pb.AssemblePolygon(&poly, &unused_edges);
-  int nn = poly.num_loops();
-  Rcpp::Rcout << "num_loops = "<< nn << std::endl;
-  std::vector<std::string> out, loopinfo;
-  Rcpp::NumericVector areas(nn);
-  
-  for(int i = 0; i < nn; i++){
-    areas[i] = poly.loop(i)->GetArea()*poly.loop(i)->sign();
-    loopinfo = dumploop(poly.loop(i));
-    out.insert(out.end(), loopinfo.begin(), loopinfo.end());
-    if(i < (nn-1)){
-      out.push_back("loopend");
-    }
-  }
-  bool valid = poly.IsValid();
-  return Rcpp::List::create(Rcpp::Named("dump") = out,
-                            Rcpp::Named("areas") = areas,
-                            Rcpp::Named("valid") = valid);
-}
-
-//[[Rcpp::export]]
 Rcpp::NumericVector latlng(SEXP p) {
   S2Point x = Rcpp::as<S2Point>(p);
   S2LatLng y(x);
@@ -179,16 +124,42 @@ bool S2Loop_IsValid(S2Loop* loop){
 bool S2Polygon_IsValid(S2Polygon* poly){
   return poly->IsValid();
 }
-  
+
+S2Cap S2Cap_FromAxisHeight(S2Cap* x, S2Point const& axis, double height) {
+  return S2Cap::FromAxisHeight(axis, height);
+}
+
+S2Cap S2Cap_FromAxisAngle(S2Cap* x, S2Point const& axis, S1Angle const& angle) {
+  return S2Cap::FromAxisAngle(axis, angle);
+}
+
+S2Cap S2Cap_FromAxisArea(S2Cap* x, S2Point const& axis, double area) {
+  return S2Cap::FromAxisArea(axis, area);
+}
+
 RCPP_EXPOSED_CLASS(S1Angle);
+RCPP_EXPOSED_CLASS(S2Cap);
 RCPP_EXPOSED_CLASS(S2LatLng);
 RCPP_EXPOSED_CLASS(S2Loop);
 RCPP_EXPOSED_CLASS(S2Polygon);
 RCPP_EXPOSED_CLASS(S2PolygonBuilder);
 RCPP_EXPOSED_CLASS(S2PolygonBuilderOptions);
+RCPP_EXPOSED_CLASS(S2LatLngRect);
+RCPP_EXPOSED_CLASS(S2Region);
 
 RCPP_MODULE(S2Polygon_module){
   using namespace Rcpp;
+  
+  class_<S2Cap>("S2Cap")
+  .constructor()
+  .method("axis", &S2Cap::axis)
+  .method("area", &S2Cap::area)
+  .method("angle", &S2Cap::angle)
+  .method("height", &S2Cap::height)
+  .method("FromAxisHeight", &S2Cap_FromAxisHeight)
+  .method("FromAxisAngle", &S2Cap_FromAxisAngle)
+  .method("FromAxisArea", &S2Cap_FromAxisArea)
+  ;
   
   class_<S1Angle>("S1Angle")
   .constructor()
@@ -201,6 +172,11 @@ RCPP_MODULE(S2Polygon_module){
   .constructor<S1Angle,S1Angle>()
   .method("FromDegrees", &S2LatLngFromDegrees)
   .method("ToPoint", &S2LatLng::ToPoint)
+  ;
+  
+  class_<S2LatLngRect>("S2LatLngRect")
+  .constructor()
+  .constructor<S2LatLng,S2LatLng>()
   ;
   
   class_<S2Loop>("S2Loop")
