@@ -12,6 +12,7 @@ Description: R bindings for Google's s2 library for geometric calculations on
     the sphere.
 License: Apache License (== 2.0)
 Imports:
+    methods, Rcpp (>= 12.5)
     Rcpp
 URL: https://github.com/spatstat/s2, https://code.google.com/archive/p/s2-geometry-library/
 SystemRequirements: OpenSSL >= 1.0.0
