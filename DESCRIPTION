@@ -1,19 +1,22 @@
 Package: s2
 Type: Package
 Title: Google's S2 Library for Geometry on the Sphere
-Version: 0.1-1
-Date: 2016-11-03
+Version: 0.1-2
 Authors@R: c(
     person('Ege', 'Rubak', email='rubak@math.aau.dk', role = c('aut', 'cre')),
-    person("Jeroen", "Ooms", , "jeroen.ooms@stat.ucla.edu", role = "aut", comment = "configure script"),
+    person("Jeroen", "Ooms", , "jeroen.ooms@stat.ucla.edu", role = "aut", comment = "configure and cleanup script"),
     person(family = "Google, Inc.", role = "cph", comment = "Original s2 source code")
     )
 Description: R bindings for Google's s2 library for geometric calculations on
     the sphere.
 License: Apache License (== 2.0)
+Depends: R (>= 3.0.0)
 Imports:
     methods, Rcpp (>= 0.12.5)
+Suggests:
+    globe
 URL: https://github.com/spatstat/s2, https://code.google.com/archive/p/s2-geometry-library/
-SystemRequirements: OpenSSL >= 1.0.0
+SystemRequirements: OpenSSL >= 1.0.0, C++11
 LinkingTo: Rcpp
-RoxygenNote: 5.0.1
+NeedsCompilation: yes
+RoxygenNote: 6.0.0
