@@ -4,7 +4,7 @@
 \name{s2-package}
 \alias{s2}
 \alias{s2-package}
-\title{Google's S2 Library for Geometry on the Sphere}
+\title{s2: Google's S2 Library for Geometry on the Sphere}
 \description{
 R bindings for Google's s2 library for geometric calculations on
 the sphere.
@@ -18,4 +18,25 @@ major platforms and have the package accepted on CRAN. Once this proof of
 concept has been achieved more of the underlying features will be made
 available to the useR.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/spatstat/s2}
+  \item \url{https://code.google.com/archive/p/s2-geometry-library/}
+}
 
+}
+\author{
+\strong{Maintainer}: Ege Rubak \email{rubak@math.aau.dk}
+
+Authors:
+\itemize{
+  \item Jeroen Ooms \email{jeroen.ooms@stat.ucla.edu} (configure and cleanup script)
+}
+
+Other contributors:
+\itemize{
+  \item  Google, Inc. (Original s2 source code) [copyright holder]
+}
+
+}
