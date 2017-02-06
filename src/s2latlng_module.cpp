@@ -9,7 +9,7 @@ S2LatLng S2LatLngFromDegrees(S2LatLng* x, double lat_degrees, double lng_degrees
   return S2LatLng::FromDegrees(lat_degrees, lng_degrees);
 }
 
-RCPP_MODULE(S2Latlng_module){
+RCPP_MODULE(S2LatLng_module){
   using namespace Rcpp;
   class_<S2LatLng>("S2LatLng")
   .constructor()
