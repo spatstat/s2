@@ -2,7 +2,7 @@ $(info The compilation root directory is: $(ROOT_DIR))
 $(info The name of the shared library to be created is: $(SHLIB))               
 
 CXX_STD = CXX11
-PKG_CPPFLAGS = -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -I./geometry -I./geometry/s2
+PKG_CPPFLAGS = -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -I../inst/include -I../inst/include/s2 -I../inst/include/base -I../inst/include/strings -I../inst/include/util/hash
 PKG_LIBS = @libs@
 PKG_CXXFLAGS = @cxxflags@ -pthread
 
@@ -51,7 +51,15 @@ SOURCES_S2= \
 OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
  
 SOURCES_RCPP= \
-./rcpp_module_s2polygon.cpp \
+./s1angle_module.cpp \
+./s2cap_module.cpp \
+./s2latlng_module.cpp \
+./s2latlngrect_module.cpp \
+./s2loop_module.cpp \
+./s2point_module.cpp \
+./s2polygon_module.cpp \
+./s2polygonbuilder_module.cpp \
+./s2package_types.cpp \
 ./RcppExports.cpp
 OBJECTS_RCPP = $(SOURCES_RCPP:.cpp=.o)
 
