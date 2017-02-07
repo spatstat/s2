@@ -8,5 +8,5 @@
 #' available to the useR.
 #'
 #' @useDynLib s2
-#' @importFrom Rcpp sourceCpp
+#' @import Rcpp methods
 "_PACKAGE"
