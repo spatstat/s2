@@ -65,9 +65,17 @@ template<> std::vector<S2Point> as(SEXP x) {
     }
     return rslt;
   } 
-  // None of the above. Assume it is a XPtr to the points.
-  Rcpp::XPtr<std::vector<S2Point>> ptr(x);
-  return *ptr;
+  // Assume a list with elements of class S2Point
+  Rcpp::List list(x);
+  const int n = list.size();
+  std::vector<S2Point> rslt(n);
+  for(int i = 0; i < n; i++){
+    rslt[i] = Rcpp::as<S2Point>(list[i]);
+  }
+  return rslt;
+  // // None of the above. Assume it is a XPtr to the points.
+  // Rcpp::XPtr<std::vector<S2Point>> ptr(x);
+  // return *ptr;
 }
 
 template <> S2PolygonBuilder::EdgeList* as(SEXP x) {
