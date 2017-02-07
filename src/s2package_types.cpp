@@ -75,8 +75,8 @@ template <> S2PolygonBuilder::EdgeList* as(SEXP x) {
   return rslt;
 }
 
-template <> SEXP wrap(const std::vector<S2Point> &p){
-  Rcpp::XPtr<std::vector<S2Point>> ptr( new std::vector<S2Point>(p), true );
-  return ptr;
-}
+// template <> SEXP wrap(const std::vector<S2Point> &p){
+//   Rcpp::XPtr<std::vector<S2Point>> ptr( new std::vector<S2Point>(p), true );
+//   return ptr;
+// }
 }
