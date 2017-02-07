@@ -11,6 +11,15 @@
 \alias{S2Polygon}
 \alias{S2PolygonBuilder}
 \alias{S2PolygonBuilderOptions}
+\alias{S1Angle-class}
+\alias{S2Cap-class}
+\alias{S2LatLng-class}
+\alias{S2LatLngRect-class}
+\alias{S2Loop-class}
+\alias{S2Point-class}
+\alias{S2Polygon-class}
+\alias{S2PolygonBuilder-class}
+\alias{S2PolygonBuilderOptions-class}
 \title{Wrapper classes for corresponding classes in Google's S2 geometry library}
 \description{
 These classes are reference classes that wrap C++ classes of the

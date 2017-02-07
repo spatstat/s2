@@ -4,7 +4,7 @@
 #'   same name.
 #'   
 #' @name S2-classes
-#' @aliases S1Angle S2Cap S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions
+#' @aliases S1Angle S2Cap S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions S1Angle-class S2Cap-class S2LatLng-class S2LatLngRect-class S2Loop-class S2Point-class S2Polygon-class S2PolygonBuilder-class S2PolygonBuilderOptions-class
 #' @rdname S2-classes
 #' @exportClass S1Angle S2Cap S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions
 #' @export S1Angle S2Cap S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions
