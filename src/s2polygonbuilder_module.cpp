@@ -6,10 +6,6 @@
 
 RCPP_MODULE(S2PolygonBuilder_module){
   using namespace Rcpp;
-  class_<S2LatLngRect>("S2LatLngRect")
-  .constructor()
-  .constructor<S2LatLng,S2LatLng>()
-  ;
   
   class_<S2PolygonBuilder>("S2PolygonBuilder")
   .constructor<S2PolygonBuilderOptions>()
