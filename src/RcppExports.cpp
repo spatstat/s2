@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// S2kMinWidthGetMaxLevel
+int S2kMinWidthGetMaxLevel(double x);
+RcppExport SEXP s2_S2kMinWidthGetMaxLevel(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2kMinWidthGetMaxLevel(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // latlng
 Rcpp::NumericVector latlng(SEXP p);
 RcppExport SEXP s2_latlng(SEXP pSEXP) {
