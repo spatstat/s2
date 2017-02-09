@@ -9,3 +9,15 @@ ll2point <- function(p) {
     .Call('s2_ll2point', PACKAGE = 's2', p)
 }
 
+makeEdgeList <- function() {
+    .Call('s2_makeEdgeList', PACKAGE = 's2')
+}
+
+sizeEdgeList <- function(e) {
+    .Call('s2_sizeEdgeList', PACKAGE = 's2', e)
+}
+
+fillEdgeList <- function(e) {
+    invisible(.Call('s2_fillEdgeList', PACKAGE = 's2', e))
+}
+

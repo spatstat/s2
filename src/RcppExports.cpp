@@ -27,3 +27,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// makeEdgeList
+SEXP makeEdgeList();
+RcppExport SEXP s2_makeEdgeList() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(makeEdgeList());
+    return rcpp_result_gen;
+END_RCPP
+}
+// sizeEdgeList
+int sizeEdgeList(SEXP e);
+RcppExport SEXP s2_sizeEdgeList(SEXP eSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type e(eSEXP);
+    rcpp_result_gen = Rcpp::wrap(sizeEdgeList(e));
+    return rcpp_result_gen;
+END_RCPP
+}
+// fillEdgeList
+void fillEdgeList(SEXP e);
+RcppExport SEXP s2_fillEdgeList(SEXP eSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type e(eSEXP);
+    fillEdgeList(e);
+    return R_NilValue;
+END_RCPP
+}
