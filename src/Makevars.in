@@ -53,6 +53,7 @@ OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
 SOURCES_RCPP= \
 ./s1angle_module.cpp \
 ./s2cap_module.cpp \
+./s2cellid_module.cpp \
 ./s2latlng_module.cpp \
 ./s2latlngrect_module.cpp \
 ./s2loop_module.cpp \
@@ -60,6 +61,7 @@ SOURCES_RCPP= \
 ./s2polygon_module.cpp \
 ./s2polygonbuilder_module.cpp \
 ./s2package_types.cpp \
+./s2region_module.cpp \
 ./RcppExports.cpp
 OBJECTS_RCPP = $(SOURCES_RCPP:.cpp=.o)
 

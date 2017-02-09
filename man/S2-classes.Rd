@@ -4,6 +4,7 @@
 \alias{S2-classes}
 \alias{S1Angle}
 \alias{S2Cap}
+\alias{S2CellId}
 \alias{S2LatLng}
 \alias{S2LatLngRect}
 \alias{S2Loop}
@@ -11,8 +12,10 @@
 \alias{S2Polygon}
 \alias{S2PolygonBuilder}
 \alias{S2PolygonBuilderOptions}
+\alias{S2Region}
 \alias{S1Angle-class}
 \alias{S2Cap-class}
+\alias{S2CellId-class}
 \alias{S2LatLng-class}
 \alias{S2LatLngRect-class}
 \alias{S2Loop-class}
@@ -20,6 +23,7 @@
 \alias{S2Polygon-class}
 \alias{S2PolygonBuilder-class}
 \alias{S2PolygonBuilderOptions-class}
+\alias{S2Region-class}
 \title{Wrapper classes for corresponding classes in Google's S2 geometry library}
 \description{
 These classes are reference classes that wrap C++ classes of the

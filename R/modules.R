@@ -4,22 +4,26 @@
 #'   same name.
 #'   
 #' @name S2-classes
-#' @aliases S1Angle S2Cap S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions S1Angle-class S2Cap-class S2LatLng-class S2LatLngRect-class S2Loop-class S2Point-class S2Polygon-class S2PolygonBuilder-class S2PolygonBuilderOptions-class
+#' @aliases S1Angle S2Cap S2CellId S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions S2Region S1Angle-class S2Cap-class S2CellId-class S2LatLng-class S2LatLngRect-class S2Loop-class S2Point-class S2Polygon-class S2PolygonBuilder-class S2PolygonBuilderOptions-class S2Region-class
 #' @rdname S2-classes
-#' @exportClass S1Angle S2Cap S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions
+#' @exportClass S1Angle S2Cap S2CellId S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions S2Region
 #' @export S1Angle S2Cap S2LatLng S2LatLngRect S2Loop S2Point S2Polygon S2PolygonBuilder S2PolygonBuilderOptions
+setRcppClass("S2Region", module = "S2Region_module")
+setRcppClass("S2CellId", module = "S2CellId_module")
 setRcppClass("S1Angle", module = "S1Angle_module")
 setRcppClass("S2Cap", module = "S2Cap_module")
 setRcppClass("S2LatLng", module = "S2LatLng_module")
-setRcppClass("S2LatLngRect", module = "S2LatLngRect_module")
+setRcppClass("S2LatLngRect", module = "S2LatLngRect_module", contains = "S2Region")
 setRcppClass("S2Loop", module = "S2Loop_module")
 setRcppClass("S2Point", module = "S2Point_module")
 setRcppClass("S2Polygon", module = "S2Polygon_module")
 setRcppClass("S2PolygonBuilder", module = "S2PolygonBuilder_module")
 setRcppClass("S2PolygonBuilderOptions", module = "S2PolygonBuilder_module")
+
 # Rcpp::loadModule("S1Angle_module", TRUE)
 # Rcpp::loadModule("S2Cap_module", TRUE)
-# Rcpp::loadModule("S2LatLng_module", TRUE)
+Rcpp::loadModule("S2CellId_module", TRUE)
+Rcpp::loadModule("S2LatLng_module", TRUE)
 # Rcpp::loadModule("S2LatLngRect_module", TRUE)
 # Rcpp::loadModule("S2Loop_module", TRUE)
 # Rcpp::loadModule("S2Point_module", TRUE)
