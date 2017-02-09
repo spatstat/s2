@@ -4,6 +4,25 @@
 #include "s2package_types.h"
 #include <Rcpp.h>
 
+//[[Rcpp::export]]
+SEXP makeEdgeList(){
+  const S2PolygonBuilder::EdgeList e;
+  return Rcpp::wrap(e);
+}
+
+//[[Rcpp::export]]
+int sizeEdgeList(SEXP e){
+  S2PolygonBuilder::EdgeList* ee = Rcpp::as<S2PolygonBuilder::EdgeList*>(e);
+  return ee->size();
+}
+
+//[[Rcpp::export]]
+void fillEdgeList(SEXP e){
+  S2PolygonBuilder::EdgeList* ee = Rcpp::as<S2PolygonBuilder::EdgeList*>(e);
+  S2Point v1, v2;
+  ee->push_back(std::make_pair(v1, v2));
+}
+
 RCPP_MODULE(S2PolygonBuilder_module){
   using namespace Rcpp;
   
