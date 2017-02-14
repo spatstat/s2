@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// maptokens
+std::unordered_multimap<std::string, int> maptokens(Rcpp::StringVector x);
+RcppExport SEXP s2_maptokens(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::StringVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(maptokens(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // S2kMinWidthGetMaxLevel
 int S2kMinWidthGetMaxLevel(double x);
 RcppExport SEXP s2_S2kMinWidthGetMaxLevel(SEXP xSEXP) {
