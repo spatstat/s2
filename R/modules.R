@@ -29,11 +29,14 @@ Rcpp::loadModule("S2LatLng_module", TRUE)
 # Rcpp::loadModule("S2Point_module", TRUE)
 # Rcpp::loadModule("S2Polygon_module", TRUE)
 # Rcpp::loadModule("S2PolygonBuilder_module", TRUE)
-# setRcppClass("S2Polygon", module = "S2Polygon_module",
-#              methods = list(
-#                test = function(x) print(x),
-#                show = function() cat("Custom print message."))
-#              )
+setRcppClass("S2Polygon", module = "S2Polygon_module",
+             methods = list(
+               Init = function(loops){
+                 dump <- lapply(loops, function(x) x$dump())
+                 .self$.internalInit(dump)
+                 }
+             )
+)
 # exposeClass("S2Cap",
 #             constructors = list(""),
 #             fields = list(""),
