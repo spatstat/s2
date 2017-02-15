@@ -9,7 +9,7 @@ using namespace Rcpp;
 //'
 //' At the moment this function is very rough around the edges...
 //' @param x List of loops
-//' @param use_loops logical to add ed
+//' @param validate logical to add validate the
 //' @export s2polygon
 //[[Rcpp::export]]
 List s2polygon(List x, bool validate = true){
