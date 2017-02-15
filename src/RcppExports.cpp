@@ -5,78 +5,15 @@
 
 using namespace Rcpp;
 
-// maptokens
-std::unordered_multimap<std::string, int> maptokens(Rcpp::StringVector x);
-RcppExport SEXP s2_maptokens(SEXP xSEXP) {
+// s2polygon
+List s2polygon(List x, bool validate);
+RcppExport SEXP s2_s2polygon(SEXP xSEXP, SEXP validateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::StringVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(maptokens(x));
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< bool >::type validate(validateSEXP);
+    rcpp_result_gen = Rcpp::wrap(s2polygon(x, validate));
     return rcpp_result_gen;
-END_RCPP
-}
-// S2kMinWidthGetMaxLevel
-int S2kMinWidthGetMaxLevel(double x);
-RcppExport SEXP s2_S2kMinWidthGetMaxLevel(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(S2kMinWidthGetMaxLevel(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// latlng
-Rcpp::NumericVector latlng(SEXP p);
-RcppExport SEXP s2_latlng(SEXP pSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(latlng(p));
-    return rcpp_result_gen;
-END_RCPP
-}
-// ll2point
-Rcpp::NumericVector ll2point(Rcpp::NumericVector p);
-RcppExport SEXP s2_ll2point(SEXP pSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type p(pSEXP);
-    rcpp_result_gen = Rcpp::wrap(ll2point(p));
-    return rcpp_result_gen;
-END_RCPP
-}
-// makeEdgeList
-SEXP makeEdgeList();
-RcppExport SEXP s2_makeEdgeList() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(makeEdgeList());
-    return rcpp_result_gen;
-END_RCPP
-}
-// sizeEdgeList
-int sizeEdgeList(SEXP e);
-RcppExport SEXP s2_sizeEdgeList(SEXP eSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type e(eSEXP);
-    rcpp_result_gen = Rcpp::wrap(sizeEdgeList(e));
-    return rcpp_result_gen;
-END_RCPP
-}
-// fillEdgeList
-void fillEdgeList(SEXP e);
-RcppExport SEXP s2_fillEdgeList(SEXP eSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type e(eSEXP);
-    fillEdgeList(e);
-    return R_NilValue;
 END_RCPP
 }

@@ -1,7 +1,6 @@
-#include "s2package_types.h"
+#include "Rcpp_datatypes.h"
+#include "s2/s2.h"
 #include <Rcpp.h>
-#include "s2/s2loop.h"
-#include "s2/s2polygonbuilder.h"
 namespace Rcpp {
 
   // namespace traits {
@@ -39,20 +38,7 @@ namespace Rcpp {
   //   };
   // }
 
-
 template<> std::vector<S2Point> as(SEXP x) {
-// Lat,lng supplied as data.frame
-  if( Rf_inherits(x, "data.frame") ){
-    Rcpp::DataFrame df(x);
-    Rcpp::NumericVector lat = df["lat"];
-    Rcpp::NumericVector lng = df["lng"];
-    const int n = lat.size();
-    std::vector<S2Point> rslt(n);
-    for(int i = 0; i < n; i++){
-      rslt[i] = S2LatLng::FromDegrees(lat[i], lng[i]).ToPoint();
-    }
-    return rslt;
-  }
 // Unit sphere points supplied as 3 column matrix
   if( Rf_isMatrix(x) ){
     Rcpp::NumericMatrix mat(x);
@@ -66,32 +52,7 @@ template<> std::vector<S2Point> as(SEXP x) {
     }
     return rslt;
   } 
-  // // Assume a list with elements of class S2Point
-  // Rcpp::List list(x);
-  // const int n = list.size();
-  // std::vector<S2Point> rslt(n);
-  // for(int i = 0; i < n; i++){
-  //   rslt[i] = Rcpp::as<S2Point>(list[i]);
-  // }
-  // return rslt;
-  // None of the above. Assume it is a XPtr to the points.
-  Rcpp::XPtr<std::vector<S2Point>> ptr(x);
-  return *ptr;
 }
-
-template <> SEXP wrap(const S2PolygonBuilder::EdgeList &e){
-  Rcpp::XPtr<S2PolygonBuilder::EdgeList> ptr( new S2PolygonBuilder::EdgeList(e), true );
-  return ptr;
-}
-
-template <> S2PolygonBuilder::EdgeList* as(SEXP x) {
-  Rcpp::XPtr<S2PolygonBuilder::EdgeList> ptr(x);
-  return ptr;
-}
-// template <> S2PolygonBuilder::EdgeList* as(SEXP x) {
-//   S2PolygonBuilder::EdgeList* rslt;
-//   return rslt;
-// }
 
 template <> SEXP wrap(const std::vector<S2Point> &p){
   Rcpp::XPtr<std::vector<S2Point>> ptr( new std::vector<S2Point>(p), true );
