@@ -5,15 +5,55 @@
 
 using namespace Rcpp;
 
+// s2point_interpolate
+SEXP s2point_interpolate(NumericMatrix x, double eps);
+RcppExport SEXP s2_s2point_interpolate(SEXP xSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(s2point_interpolate(x, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
 // s2polygon
-List s2polygon(List x, bool validate);
-RcppExport SEXP s2_s2polygon(SEXP xSEXP, SEXP validateSEXP) {
+List s2polygon(List x, bool validate, bool xor_edges, double vertex_merge_radius, double edge_splice_fraction, bool undirected_edges);
+RcppExport SEXP s2_s2polygon(SEXP xSEXP, SEXP validateSEXP, SEXP xor_edgesSEXP, SEXP vertex_merge_radiusSEXP, SEXP edge_splice_fractionSEXP, SEXP undirected_edgesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type x(xSEXP);
     Rcpp::traits::input_parameter< bool >::type validate(validateSEXP);
-    rcpp_result_gen = Rcpp::wrap(s2polygon(x, validate));
+    Rcpp::traits::input_parameter< bool >::type xor_edges(xor_edgesSEXP);
+    Rcpp::traits::input_parameter< double >::type vertex_merge_radius(vertex_merge_radiusSEXP);
+    Rcpp::traits::input_parameter< double >::type edge_splice_fraction(edge_splice_fractionSEXP);
+    Rcpp::traits::input_parameter< bool >::type undirected_edges(undirected_edgesSEXP);
+    rcpp_result_gen = Rcpp::wrap(s2polygon(x, validate, xor_edges, vertex_merge_radius, edge_splice_fraction, undirected_edges));
+    return rcpp_result_gen;
+END_RCPP
+}
+// s2polygon_union
+List s2polygon_union(List x, List y);
+RcppExport SEXP s2_s2polygon_union(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< List >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(s2polygon_union(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// s2polygon_intersection
+List s2polygon_intersection(List x, List y);
+RcppExport SEXP s2_s2polygon_intersection(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< List >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(s2polygon_intersection(x, y));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -2,15 +2,33 @@
 % Please edit documentation in R/RcppExports.R
 \name{s2polygon}
 \alias{s2polygon}
-\title{Create an object of class s2polygon}
+\title{Coerce list to s2polygon format}
 \usage{
-s2polygon(x, validate = TRUE)
+s2polygon(x, validate = TRUE, xor_edges = TRUE, vertex_merge_radius = 0,
+  edge_splice_fraction = 0.866, undirected_edges = FALSE)
 }
 \arguments{
 \item{x}{List of loops}
 
-\item{use_loops}{logical to add ed}
+\item{validate}{Logical to validate the s2polygon. Default is `TRUE`.}
+
+\item{xor_edges}{Logical to indicate that edges should be 'xor'ed to avoind
+multiple loops with common edges. Default is `TRUE`.}
+
+\item{vertex_merge_radius}{Numeric indicating that vertices within this
+distance should be merged. Defaults to zero (i.e. no merging).}
+
+\item{edge_splice_fraction}{Determines when edges are spliced. See C++
+header as indicated in the description of this function. Default is 0.866.}
+
+\item{undirected_edges}{Logical to indicate that input edges should be
+considered undirected.  Default is `FALSE`.
+multiple loops with common edges. Default is `TRUE`.}
 }
 \description{
-At the moment this function is very rough around the edges...
+This is a lowlevel function with no checking of parameters. Use at own risk!
+}
+\details{
+It builds an `S2Polygon` using the C++ polygon builder. See the header file
+inst/include/s2/s2polygonbuilder.h for details on how to use the arguments.
 }
