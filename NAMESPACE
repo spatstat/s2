@@ -2,6 +2,7 @@
 
 export(s2point_interpolate)
 export(s2polygon)
+export(s2polygon_contains_point)
 export(s2polygon_intersection)
 export(s2polygon_union)
 import(Rcpp)

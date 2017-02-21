@@ -1,6 +1,7 @@
 #include "Rcpp_datatypes.h"
 #include <Rcpp.h>
 #include <s2/s2.h>
+#include <s2/s2cell.h>
 #include <s2/s2polygon.h>
 #include <s2/s2polygonbuilder.h>
 
@@ -151,4 +152,32 @@ List s2polygon_intersection(List x, List y){
   S2PolygonInitFromR(y, poly2);
   poly12.InitToIntersection(&poly1, &poly2);
   return S2PolygonWrapForR(poly12);
+}
+
+//' Point in s2polygon test
+//'
+//' Test whether points on the sphere are contained in a polygon on the sphere
+//' 
+//' @param points A three column matrix represtenting the points.
+//' @param poly List of polygon loops represented by three column matrices.
+//' @param approx Logical to use approximate testing of point in polygon (allows
+//' points very slightly outside the polygon). Useful for allowing points
+//' directly on the border.
+//' @export s2polygon_contains_point
+//[[Rcpp::export]]
+LogicalVector s2polygon_contains_point(NumericMatrix points, List poly,
+                                       bool approx = true){
+  S2Polygon s2poly;
+  S2PolygonInitFromR(poly, s2poly);
+  auto s2points = S2PointVecFromR(points);
+  int n = s2points.size();
+  LogicalVector rslt(n);
+  for(int i = 0; i < n; i++){
+    if(approx){
+      rslt(i) = s2poly.MayIntersect(S2Cell(s2points[i]));
+    } else{
+      rslt(i) = s2poly.Contains(s2points[i]);
+    }
+  }
+  return rslt;
 }

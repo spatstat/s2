@@ -57,3 +57,17 @@ s2polygon_intersection <- function(x, y) {
     .Call('s2_s2polygon_intersection', PACKAGE = 's2', x, y)
 }
 
+#' Point in s2polygon test
+#'
+#' Test whether points on the sphere are contained in a polygon on the sphere
+#' 
+#' @param points A three column matrix represtenting the points.
+#' @param poly List of polygon loops represented by three column matrices.
+#' @param approx Logical to use approximate testing of point in polygon (allows
+#' points very slightly outside the polygon). Useful for allowing points
+#' directly on the border.
+#' @export s2polygon_contains_point
+s2polygon_contains_point <- function(points, poly, approx = TRUE) {
+    .Call('s2_s2polygon_contains_point', PACKAGE = 's2', points, poly, approx)
+}
+

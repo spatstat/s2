@@ -57,3 +57,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// s2polygon_contains_point
+LogicalVector s2polygon_contains_point(NumericMatrix points, List poly, bool approx);
+RcppExport SEXP s2_s2polygon_contains_point(SEXP pointsSEXP, SEXP polySEXP, SEXP approxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type points(pointsSEXP);
+    Rcpp::traits::input_parameter< List >::type poly(polySEXP);
+    Rcpp::traits::input_parameter< bool >::type approx(approxSEXP);
+    rcpp_result_gen = Rcpp::wrap(s2polygon_contains_point(points, poly, approx));
+    return rcpp_result_gen;
+END_RCPP
+}

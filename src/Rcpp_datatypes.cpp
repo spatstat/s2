@@ -104,6 +104,8 @@ template <> SEXP wrap(const std::vector<S2Point> &p){
 
 // Get a vector of `S2Point`s from a three column matrix from R.
 std::vector<S2Point> S2PointVecFromR(Rcpp::NumericMatrix mat){
+  if(mat.ncol() != 3)
+    Rcpp::stop("Can't interpret input as points on the sphere - must be a three column matrix.");
   Rcpp::NumericVector coord1 = mat( Rcpp::_, 0);
   Rcpp::NumericVector coord2 = mat( Rcpp::_, 1);
   Rcpp::NumericVector coord3 = mat( Rcpp::_, 2);
