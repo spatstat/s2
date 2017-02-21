@@ -5,6 +5,41 @@
 
 using namespace Rcpp;
 
+// s2cap
+List s2cap(NumericVector axis, double height);
+RcppExport SEXP s2_s2cap(SEXP axisSEXP, SEXP heightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type axis(axisSEXP);
+    Rcpp::traits::input_parameter< double >::type height(heightSEXP);
+    rcpp_result_gen = Rcpp::wrap(s2cap(axis, height));
+    return rcpp_result_gen;
+END_RCPP
+}
+// s2cap_contains_point
+LogicalVector s2cap_contains_point(NumericMatrix points, List cap);
+RcppExport SEXP s2_s2cap_contains_point(SEXP pointsSEXP, SEXP capSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type points(pointsSEXP);
+    Rcpp::traits::input_parameter< List >::type cap(capSEXP);
+    rcpp_result_gen = Rcpp::wrap(s2cap_contains_point(points, cap));
+    return rcpp_result_gen;
+END_RCPP
+}
+// s2cap_area
+double s2cap_area(List cap);
+RcppExport SEXP s2_s2cap_area(SEXP capSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type cap(capSEXP);
+    rcpp_result_gen = Rcpp::wrap(s2cap_area(cap));
+    return rcpp_result_gen;
+END_RCPP
+}
 // s2point_interpolate
 SEXP s2point_interpolate(NumericMatrix x, double eps);
 RcppExport SEXP s2_s2point_interpolate(SEXP xSEXP, SEXP epsSEXP) {
