@@ -68,6 +68,17 @@ void S2PolygonInitFromR(List list, S2Polygon& poly){
   pb.AssemblePolygon(&poly, &unused_edges);
 }
 
+// Construct a S2Polygon from a list of three column matrices from R
+// void S2PolygonNoBuilderInitFromR(List list, S2Polygon& poly, std::vector<S2Loop*>& looplist){
+//   int n = list.size();
+//   for(int i = 0; i < n; i++){
+//     // std::vector<S2Point> points = as<std::vector<S2Point>>(list[i]);
+//     std::vector<S2Point> points = S2PointVecFromR(list[i]);
+//     looplist[i]->Init(points);
+//   }
+//   poly.Init(&looplist);
+// }
+
 //' Coerce list to s2polygon format
 //'
 //' This is a lowlevel function with no checking of parameters. Use at own risk!
