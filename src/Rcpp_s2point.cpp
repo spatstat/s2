@@ -41,9 +41,9 @@ std::vector<S2Point> s2point_interpolate(std::vector<S2Point> points, double eps
 //' @param x Matrix with three columns representing the points.
 //' @param eps Strictly positive real number. Values greater than or equal to pi
 //' correspond to no interpolation.
-//' @export s2point_interpolate
+//' @export S2PointVector_interpolate
 //[[Rcpp::export]]
-SEXP s2point_interpolate(NumericMatrix x, double eps){
+SEXP S2PointVector_interpolate(NumericMatrix x, double eps){
   std::vector<S2Point> points  = S2PointVecFromR(x);
   return wrap(s2point_interpolate(points, eps));
 }

@@ -79,29 +79,10 @@ void S2PolygonInitFromR(List list, S2Polygon& poly){
 //   poly.Init(&looplist);
 // }
 
-//' Coerce list to s2polygon format
-//'
-//' This is a lowlevel function with no checking of parameters. Use at own risk!
-//' 
-//' It builds an `S2Polygon` using the C++ polygon builder. See the header file
-//' inst/include/s2/s2polygonbuilder.h for details on how to use the arguments.
-//' 
-//' @param x List of loops
-//' @param validate Logical to validate the s2polygon. Default is `TRUE`.
-//' @param xor_edges Logical to indicate that edges should be 'xor'ed to avoind
-//' multiple loops with common edges. Default is `TRUE`.
-//' @param vertex_merge_radius Numeric indicating that vertices within this
-//' distance should be merged. Defaults to zero (i.e. no merging).
-//' @param edge_splice_fraction Determines when edges are spliced. See C++
-//' header as indicated in the description of this function. Default is 0.866.
-//' @param undirected_edges Logical to indicate that input edges should be
-//' considered undirected.  Default is `FALSE`.
-//' multiple loops with common edges. Default is `TRUE`.
-//' @export s2polygon
 //[[Rcpp::export]]
-List s2polygon(List x, bool validate = true, bool xor_edges = true,
-               double vertex_merge_radius = 0, double edge_splice_fraction = 0.866,
-               bool undirected_edges = false){
+List S2PolygonBuild(List x, bool validate = true, bool xor_edges = true,
+                    double vertex_merge_radius = 0, double edge_splice_fraction = 0.866,
+                    bool undirected_edges = false){
   int n = x.size();
   S2PolygonBuilderOptions pbo;
   pbo.set_validate(validate);
@@ -135,16 +116,16 @@ List s2polygon(List x, bool validate = true, bool xor_edges = true,
 //'
 //' Given two lists of three column matrices representing S2Polygons calculate
 //' the union or intersection. Assumes the polygons have already been validated
-//' and put into the correct format by [`s2polygon`]. Note the input is only the
+//' and put into the correct format by [`S2Polygon`]. Note the input is only the
 //' loops/rings of two polygons not the entire objects with areas and hole
 //' indicators.
 //' 
-//' @param x List of loops represented by three column matrices.
-//' @param y List of loops represented by three column matrices.
-//' @aliases s2polygon_intersection
-//' @export s2polygon_union
+//' @param x List of loops represented by three-column matrices.
+//' @param y List of loops represented by three-column matrices.
+//' @aliases S2Polygon_intersection
+//' @export S2Polygon_union
 //[[Rcpp::export]]
-List s2polygon_union(List x, List y){
+List S2Polygon_union(List x, List y){
   S2Polygon poly1,poly2,poly12;
   S2PolygonInitFromR(x, poly1);
   S2PolygonInitFromR(y, poly2);
@@ -152,12 +133,12 @@ List s2polygon_union(List x, List y){
   return S2PolygonWrapForR(poly12);
 }
 
-// //' @describeIn s2polygon_union Union of two s2polygons.
-// //' @describeIn s2polygon_union Intersection of two s2polygons.
+// //' @describeIn S2Polygon_union Union of two S2Polygons.
+// //' @describeIn S2Polygon_union Intersection of two S2Polygons.
 
-//' @export s2polygon_intersection
+//' @export S2Polygon_intersection
 //[[Rcpp::export]]
-List s2polygon_intersection(List x, List y){
+List S2Polygon_intersection(List x, List y){
   S2Polygon poly1,poly2,poly12;
   S2PolygonInitFromR(x, poly1);
   S2PolygonInitFromR(y, poly2);
@@ -165,18 +146,8 @@ List s2polygon_intersection(List x, List y){
   return S2PolygonWrapForR(poly12);
 }
 
-//' Point in s2polygon test
-//'
-//' Test whether points on the sphere are contained in a polygon on the sphere
-//' 
-//' @param points A three column matrix represtenting the points.
-//' @param poly List of polygon loops represented by three column matrices.
-//' @param approx Logical to use approximate testing of point in polygon (allows
-//' points very slightly outside the polygon). Useful for allowing points
-//' directly on the border.
-//' @export s2polygon_contains_point
 //[[Rcpp::export]]
-LogicalVector s2polygon_contains_point(NumericMatrix points, List poly,
+LogicalVector S2Polygon_contains_point(NumericMatrix points, List poly,
                                        bool approx = true){
   S2Polygon s2poly;
   S2PolygonInitFromR(poly, s2poly);
