@@ -1,58 +1,56 @@
-PKG_CXXFLAGS = -std=gnu++11
+CXX_STD = CXX11
 PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -D_USE_MATH_DEFINES -DHASH_NAMESPACE=std -DNDEBUG -I../windows/openssl-1.0.2d/include -I../inst/include -I../inst/include/s2 -I../inst/include/base -I../inst/include/strings -I../inst/include/util/hash
 PKG_LIBS=-L../windows/openssl-1.0.2d/lib${R_ARCH} -lssl -lcrypto
 
-SOURCES_S2UTIL= \
-./geometry/base/int128.cc \
-./geometry/base/logging.cc \
-./geometry/base/stringprintf.cc \
-./geometry/base/strtoint.cc \
-./geometry/strings/ascii_ctype.cc \
-./geometry/strings/split.cc \
-./geometry/strings/stringprintf.cc \
-./geometry/strings/strutil.cc \
-./geometry/util/coding/coder.cc \
-./geometry/util/coding/varint.cc \
-./geometry/util/hash/hash.cc \
-./geometry/util/math/exactfloat/exactfloat.cc \
-./geometry/util/math/mathlimits.cc \
-./geometry/util/math/mathutil.cc
-OBJECTS_S2UTIL = $(SOURCES_S2UTIL:.cc=.o)
+OBJECTS_S2UTIL= \
+  geometry/base/int128.o \
+  geometry/base/logging.o \
+  geometry/base/stringprintf.o \
+  geometry/base/strtoint.o \
+  geometry/strings/ascii_ctype.o \
+  geometry/strings/split.o \
+  geometry/strings/stringprintf.o \
+  geometry/strings/strutil.o \
+  geometry/util/coding/coder.o \
+  geometry/util/coding/varint.o \
+  geometry/util/hash/hash.o \
+  geometry/util/math/exactfloat/exactfloat.o \
+  geometry/util/math/mathlimits.o \
+  geometry/util/math/mathutil.o
 
-SOURCES_S2CELLID= \
-./geometry/s1angle.cc \
-./geometry/s2.cc \
-./geometry/s2cellid.cc \
-./geometry/s2latlng.cc
-OBJECTS_S2CELLID = $(SOURCES_S2CELLID:.cc=.o)
+OBJECTS_S2CELLID= \
+  geometry/s1angle.o \
+  geometry/s2.o \
+  geometry/s2cellid.o \
+  geometry/s2latlng.o
 
-SOURCES_S2= \
-./geometry/s1interval.cc \
-./geometry/s2cap.cc \
-./geometry/s2cell.cc \
-./geometry/s2cellunion.cc \
-./geometry/s2edgeindex.cc \
-./geometry/s2edgeutil.cc \
-./geometry/s2latlngrect.cc \
-./geometry/s2loop.cc \
-./geometry/s2pointregion.cc \
-./geometry/s2polygon.cc \
-./geometry/s2polygonbuilder.cc \
-./geometry/s2polyline.cc \
-./geometry/s2r2rect.cc \
-./geometry/s2region.cc \
-./geometry/s2regioncoverer.cc \
-./geometry/s2regionintersection.cc \
-./geometry/s2regionunion.cc
-OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
+OBJECTS_S2= \
+  geometry/s1interval.o \
+  geometry/s2cap.o \
+  geometry/s2cell.o \
+  geometry/s2cellunion.o \
+  geometry/s2edgeindex.o \
+  geometry/s2edgeutil.o \
+  geometry/s2latlngrect.o \
+  geometry/s2loop.o \
+  geometry/s2pointregion.o \
+  geometry/s2polygon.o \
+  geometry/s2polygonbuilder.o \
+  geometry/s2polyline.o \
+  geometry/s2r2rect.o \
+  geometry/s2region.o \
+  geometry/s2regioncoverer.o \
+  geometry/s2regionintersection.o \
+  geometry/s2regionunion.o
  
-SOURCES_RCPP= \
-./Rcpp_datatypes.cpp \
-./Rcpp_s2polygon.cpp \
-./RcppExports.cpp
-OBJECTS_RCPP = $(SOURCES_RCPP:.cpp=.o)
+OBJECTS_RCPP= \
+  Rcpp_datatypes.o \
+  Rcpp_s2cap.o \
+  Rcpp_s2cell.o \
+  Rcpp_s2point.o \
+  Rcpp_s2polygon.o \
+  RcppExports.o
 
-SOURCES= $(SOURCES_S2UTIL) $(SOURCES_S2CELLID) $(SOURCES_S2) $(SOURCES_RCPP)
 OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) $(OBJECTS_RCPP)
 
 all: winlibs
