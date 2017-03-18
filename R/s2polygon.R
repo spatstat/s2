@@ -30,12 +30,12 @@ S2Polygon <- function(x, validate = TRUE, xor_edges = TRUE, vertex_merge_radius 
 #'
 #' @param poly Named list containing an entry called `loops` containing a list
 #' of polygon loops represented by three-column matrices.
-#' @param x Object(s) to test for containment in `cap`. At the moment only
+#' @param x Object(s) to test for containment in `poly`. At the moment only
 #' points are handled and they must be specified as a three-column matrix.
 #' @param approx Logical to use approximate testing of point in polygon (allows
 #' points very slightly outside the polygon). Useful for allowing points
 #' directly on the border.
 #' @export
 S2Polygon_Contains <- function(poly, x, approx = TRUE){
-  S2Polygon_contains_point(x$loops, poly, approx)
+  S2Polygon_contains_point(x, poly$loops, approx)
 }

@@ -2,14 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' Construct a S2Cap using axis and height
-#' 
+#'
 #' Constructs a S2Cap from axis and height
-#' 
+#'
 #' @param axis A numeric vector with three entries represtenting the direction axis.
 #' @param height Single numeric representing the height of the cap.
-#' @export S2Cap_FromAxisHeight
-S2Cap_FromAxisHeight <- function(axis, height) {
-    .Call('s2_S2Cap_FromAxisHeight', PACKAGE = 's2', axis, height)
+#' @export S2CapFromAxisHeight
+S2CapFromAxisHeight <- function(axis, height) {
+    .Call('s2_S2CapFromAxisHeight', PACKAGE = 's2', axis, height)
 }
 
 S2Cap_contains_point <- function(points, cap) {
@@ -19,11 +19,64 @@ S2Cap_contains_point <- function(points, cap) {
 #' Area of s2cap
 #'
 #' Area of a cap
-#'  
+#'
 #' @param cap Named list containing axis and height of cap.
-#' @export S2Cap_Area
-S2Cap_Area <- function(cap) {
-    .Call('s2_S2Cap_Area', PACKAGE = 's2', cap)
+#' @export S2Cap_area
+S2Cap_area <- function(cap) {
+    .Call('s2_S2Cap_area', PACKAGE = 's2', cap)
+}
+
+#' Make a Vector of S2CellIds From Points on the Sphere
+#'
+#' Create a vector of S2CellIds corresponding to the cells at the given level 
+#' containing the given points. The default level (30) corresponds to leaf
+#' cells (finest level).
+#'
+#' @param x Three-column matrix reprensenting the points.
+#' @param level Integer between 0 and 30 (incl).
+#' @return A character vector with S2CellIds with the additional class
+#' `S2CellId`.
+#' @export S2CellIdFromPoint
+S2CellIdFromPoint <- function(x, level = 30L) {
+    .Call('s2_S2CellIdFromPoint', PACKAGE = 's2', x, level)
+}
+
+#' Convert S2CellId to a S2Point
+#'
+#' Convert S2CellId to a S2Point
+#'
+#' @param x Character vector of S2CellIds in token form.
+#' @return Three-column matrix reprensenting the points..
+#' @export S2CellId_ToPoint
+S2CellId_ToPoint <- function(x) {
+    .Call('s2_S2CellId_ToPoint', PACKAGE = 's2', x)
+}
+
+#' Make a vector of S2CellId strings
+#'
+#' Make a vector of S2CellId strings
+#'
+#' @param x A charecter vector with S2CellIds (in token form).
+#' @return A character vector with S2CellId strings.
+#' @export S2CellId_ToString
+S2CellId_ToString <- function(x) {
+    .Call('s2_S2CellId_ToString', PACKAGE = 's2', x)
+}
+
+S2Cell_vertices_from_token <- function(tokens) {
+    .Call('s2_S2Cell_vertices_from_token', PACKAGE = 's2', tokens)
+}
+
+S2Cell_vertices_from_point <- function(mat, level) {
+    .Call('s2_S2Cell_vertices_from_point', PACKAGE = 's2', mat, level)
+}
+
+S2Cell_grid_centers <- function(level) {
+    .Call('s2_S2Cell_grid_centers', PACKAGE = 's2', level)
+}
+
+S2Covering_internal <- function(x, type, max_cells, min_level, max_level, interior) {
+    .Call('s2_S2Covering_internal', PACKAGE = 's2', x, type, max_cells, min_level, max_level, interior)
 }
 
 #' Interpolation of points on unit sphere
@@ -33,9 +86,9 @@ S2Cap_Area <- function(cap) {
 #' @param x Matrix with three columns representing the points.
 #' @param eps Strictly positive real number. Values greater than or equal to pi
 #' correspond to no interpolation.
-#' @export S2PointVector_interpolate
-S2PointVector_interpolate <- function(x, eps) {
-    .Call('s2_S2PointVector_interpolate', PACKAGE = 's2', x, eps)
+#' @export S2Point_interpolate
+S2Point_interpolate <- function(x, eps) {
+    .Call('s2_S2Point_interpolate', PACKAGE = 's2', x, eps)
 }
 
 S2PolygonBuild <- function(x, validate = TRUE, xor_edges = TRUE, vertex_merge_radius = 0, edge_splice_fraction = 0.866, undirected_edges = FALSE) {
@@ -65,5 +118,17 @@ S2Polygon_intersection <- function(x, y) {
 
 S2Polygon_contains_point <- function(points, poly, approx = TRUE) {
     .Call('s2_S2Polygon_contains_point', PACKAGE = 's2', points, poly, approx)
+}
+
+#' Distance from points to line on sphere
+#'
+#' Distance from points to line on sphere.
+#' 
+#' @param line Line represented by a sequence of vertices given as a single
+#' three-column matrices with one line per vertex.
+#' @param x Points represented by three-column matrices.
+#' @export S2Polyline_dist
+S2Polyline_dist <- function(line, x) {
+    .Call('s2_S2Polyline_dist', PACKAGE = 's2', line, x)
 }
 

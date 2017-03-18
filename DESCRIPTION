@@ -19,4 +19,4 @@ URL: https://github.com/spatstat/s2, https://code.google.com/archive/p/s2-geomet
 SystemRequirements: OpenSSL >= 1.0.0, C++11
 LinkingTo: Rcpp
 NeedsCompilation: yes
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1.9000

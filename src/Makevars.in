@@ -53,6 +53,7 @@ OBJECTS_S2 = $(SOURCES_S2:.cc=.o)
 SOURCES_RCPP= \
 ./Rcpp_datatypes.cpp \
 ./Rcpp_s2cap.cpp \
+./Rcpp_s2cell.cpp \
 ./Rcpp_s2point.cpp \
 ./Rcpp_s2polygon.cpp \
 ./RcppExports.cpp

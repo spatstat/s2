@@ -25,9 +25,9 @@ List S2CapWrapForR(const S2Cap& cap){
 //'
 //' @param axis A numeric vector with three entries represtenting the direction axis.
 //' @param height Single numeric representing the height of the cap.
-//' @export S2Cap_FromAxisHeight
+//' @export S2CapFromAxisHeight
 //[[Rcpp::export]]
-List S2Cap_FromAxisHeight(NumericVector axis, double height){
+List S2CapFromAxisHeight(NumericVector axis, double height){
   S2Point a = S2Point(axis[0], axis[1], axis[2]);
   return S2CapWrapForR(S2Cap::FromAxisHeight(a, height));
 }
@@ -56,9 +56,9 @@ LogicalVector S2Cap_contains_point(NumericMatrix points, List cap){
 //' Area of a cap
 //'
 //' @param cap Named list containing axis and height of cap.
-//' @export S2Cap_Area
+//' @export S2Cap_area
 //[[Rcpp::export]]
-double S2Cap_Area(List cap){
+double S2Cap_area(List cap){
   S2Cap c = R_S2CapFromList(cap);
   return c.area();
 }

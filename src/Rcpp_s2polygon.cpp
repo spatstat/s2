@@ -4,6 +4,7 @@
 #include <s2/s2cell.h>
 #include <s2/s2polygon.h>
 #include <s2/s2polygonbuilder.h>
+#include <s2/s2polyline.h>
 
 using namespace Rcpp;
 
@@ -160,6 +161,71 @@ LogicalVector S2Polygon_contains_point(NumericMatrix points, List poly,
     } else{
       rslt(i) = s2poly.Contains(s2points[i]);
     }
+  }
+  return rslt;
+}
+
+std::vector<S2Point> S2PointVectorFromS2Polygon(S2Polygon& poly, int loopindex){
+  int n = poly.loop(loopindex)->num_vertices();
+  std::vector<S2Point> rslt(n);
+  // Notice "<=" here to repeat first vertex at end.
+  for(int i = 0; i <= n; i++){
+    rslt[i] = poly.loop(loopindex)->vertex(i%n);
+  }
+  return rslt;
+}
+
+double S2PointDist(S2Point& x, S2Point& y){
+  S2Point cross = x.CrossProd(y);
+  double dot = x.DotProd(y);
+  return atan2(cross.Norm(), dot);
+}
+
+// //' @export S2Polygon_border_dist
+// //[[Rcpp::export]]
+// NumericVector S2Polygon_border_dist(NumericMatrix points, List poly){
+//   int junk;
+//   S2Polygon s2poly;
+//   S2PolygonInitFromR(poly, s2poly);
+//   auto s2points = S2PointVecFromR(points);
+//   int npoints = s2points.size();
+//   int nloops = s2poly.num_loops();
+//   NumericVector rslt(npoints);
+//   for(int i = 0; i < nloops; i++){
+//     double dist = 3.14;
+//     std::vector<S2Point> vertices = S2PointVectorFromS2Polygon(s2poly, i);
+//     S2Polyline line(vertices);
+//     for(int j = 0; j < npoints; j++){
+//       S2Point projected = line.Project(s2points[j], &junk);
+//       dist = min(dist, S2PointDist(s2points[j], projected));
+//     }
+//     rslt(i) = dist;
+//   }
+//   return rslt;
+// }
+
+//' Distance from points to line on sphere
+//'
+//' Distance from points to line on sphere.
+//' 
+//' @param line Line represented by a sequence of vertices given as a single
+//' three-column matrices with one line per vertex.
+//' @param x Points represented by three-column matrices.
+//' @export S2Polyline_dist
+//[[Rcpp::export]]
+NumericVector S2Polyline_dist(NumericMatrix line, NumericMatrix x){
+  // Read loop as a vector of points (adding the closing vertex)
+  auto vertices = S2PointVecFromR(line);
+  auto points = S2PointVecFromR(x);
+  S2Polyline polyline(vertices);
+  // Loop through points, project to line and calculate dist.
+  int junk;
+  double dist;
+  int npoints = points.size();
+  NumericVector rslt(npoints);
+  for(int i = 0; i < npoints; i++){
+    S2Point projected = polyline.Project(points[i], &junk);
+    rslt(i) = S2PointDist(points[i], projected);
   }
   return rslt;
 }

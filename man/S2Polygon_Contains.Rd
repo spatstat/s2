@@ -10,7 +10,7 @@ S2Polygon_Contains(poly, x, approx = TRUE)
 \item{poly}{Named list containing an entry called `loops` containing a list
 of polygon loops represented by three-column matrices.}
 
-\item{x}{Object(s) to test for containment in `cap`. At the moment only
+\item{x}{Object(s) to test for containment in `poly`. At the moment only
 points are handled and they must be specified as a three-column matrix.}
 
 \item{approx}{Logical to use approximate testing of point in polygon (allows

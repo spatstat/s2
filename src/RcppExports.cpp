@@ -5,15 +5,15 @@
 
 using namespace Rcpp;
 
-// S2Cap_FromAxisHeight
-List S2Cap_FromAxisHeight(NumericVector axis, double height);
-RcppExport SEXP s2_S2Cap_FromAxisHeight(SEXP axisSEXP, SEXP heightSEXP) {
+// S2CapFromAxisHeight
+List S2CapFromAxisHeight(NumericVector axis, double height);
+RcppExport SEXP s2_S2CapFromAxisHeight(SEXP axisSEXP, SEXP heightSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type axis(axisSEXP);
     Rcpp::traits::input_parameter< double >::type height(heightSEXP);
-    rcpp_result_gen = Rcpp::wrap(S2Cap_FromAxisHeight(axis, height));
+    rcpp_result_gen = Rcpp::wrap(S2CapFromAxisHeight(axis, height));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -29,26 +29,110 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// S2Cap_Area
-double S2Cap_Area(List cap);
-RcppExport SEXP s2_S2Cap_Area(SEXP capSEXP) {
+// S2Cap_area
+double S2Cap_area(List cap);
+RcppExport SEXP s2_S2Cap_area(SEXP capSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type cap(capSEXP);
-    rcpp_result_gen = Rcpp::wrap(S2Cap_Area(cap));
+    rcpp_result_gen = Rcpp::wrap(S2Cap_area(cap));
     return rcpp_result_gen;
 END_RCPP
 }
-// S2PointVector_interpolate
-SEXP S2PointVector_interpolate(NumericMatrix x, double eps);
-RcppExport SEXP s2_S2PointVector_interpolate(SEXP xSEXP, SEXP epsSEXP) {
+// S2CellIdFromPoint
+CharacterVector S2CellIdFromPoint(NumericMatrix x, int level);
+RcppExport SEXP s2_S2CellIdFromPoint(SEXP xSEXP, SEXP levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type level(levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2CellIdFromPoint(x, level));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2CellId_ToPoint
+SEXP S2CellId_ToPoint(std::vector<std::string> x);
+RcppExport SEXP s2_S2CellId_ToPoint(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2CellId_ToPoint(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2CellId_ToString
+CharacterVector S2CellId_ToString(std::vector<std::string> x);
+RcppExport SEXP s2_S2CellId_ToString(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2CellId_ToString(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Cell_vertices_from_token
+List S2Cell_vertices_from_token(std::vector<std::string> tokens);
+RcppExport SEXP s2_S2Cell_vertices_from_token(SEXP tokensSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type tokens(tokensSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Cell_vertices_from_token(tokens));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Cell_vertices_from_point
+List S2Cell_vertices_from_point(NumericMatrix mat, int level);
+RcppExport SEXP s2_S2Cell_vertices_from_point(SEXP matSEXP, SEXP levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
+    Rcpp::traits::input_parameter< int >::type level(levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Cell_vertices_from_point(mat, level));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Cell_grid_centers
+NumericMatrix S2Cell_grid_centers(int level);
+RcppExport SEXP s2_S2Cell_grid_centers(SEXP levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type level(levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Cell_grid_centers(level));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Covering_internal
+List S2Covering_internal(List x, std::string type, int max_cells, int min_level, int max_level, bool interior);
+RcppExport SEXP s2_S2Covering_internal(SEXP xSEXP, SEXP typeSEXP, SEXP max_cellsSEXP, SEXP min_levelSEXP, SEXP max_levelSEXP, SEXP interiorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< int >::type max_cells(max_cellsSEXP);
+    Rcpp::traits::input_parameter< int >::type min_level(min_levelSEXP);
+    Rcpp::traits::input_parameter< int >::type max_level(max_levelSEXP);
+    Rcpp::traits::input_parameter< bool >::type interior(interiorSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Covering_internal(x, type, max_cells, min_level, max_level, interior));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Point_interpolate
+SEXP S2Point_interpolate(NumericMatrix x, double eps);
+RcppExport SEXP s2_S2Point_interpolate(SEXP xSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
-    rcpp_result_gen = Rcpp::wrap(S2PointVector_interpolate(x, eps));
+    rcpp_result_gen = Rcpp::wrap(S2Point_interpolate(x, eps));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -102,6 +186,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< List >::type poly(polySEXP);
     Rcpp::traits::input_parameter< bool >::type approx(approxSEXP);
     rcpp_result_gen = Rcpp::wrap(S2Polygon_contains_point(points, poly, approx));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Polyline_dist
+NumericVector S2Polyline_dist(NumericMatrix line, NumericMatrix x);
+RcppExport SEXP s2_S2Polyline_dist(SEXP lineSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type line(lineSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Polyline_dist(line, x));
     return rcpp_result_gen;
 END_RCPP
 }
