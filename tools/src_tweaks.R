@@ -28,7 +28,7 @@ file <- file.path("base", "port.h")
 content <- readLines(file)
 ii <- grep('define __BYTE_ORDER for MSVC', content)
 # Overwrite next line
-content[ii + 1] <- "#if defined COMPILER_MSVC || defined WIN32"
+content[ii + 1] <- "#if defined COMPILER_MSVC || defined WIN32 || defined __WIN32__"
 writeLines(content, file)
 ##################################################
 
