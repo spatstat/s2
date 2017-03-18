@@ -1,4 +1,4 @@
-PKG_CXXFLAGS = -std=gnu++11
+CXX_STD=CXX11
 PKG_CPPFLAGS= -DS2_USE_EXACTFLOAT -D_USE_MATH_DEFINES -DHASH_NAMESPACE=std -DNDEBUG -I../windows/openssl-1.0.2d/include -I./geometry -I./geometry/s2
 PKG_LIBS=-L../windows/openssl-1.0.2d/lib${R_ARCH} -lssl -lcrypto
 
