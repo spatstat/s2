@@ -35,7 +35,7 @@ List S2PolygonWrapForR(const S2Polygon& poly){
   auto rslt = List::create(Named("loops") = out_loops,
                            Named("areas") = areas,
                            Named("holes") = holes);
-  rslt.attr( "class" ) = "s2polygon" ;
+  rslt.attr( "class" ) = "S2Polygon" ;
   return rslt;
 }
 
@@ -54,7 +54,7 @@ std::pair<std::vector<S2Point>,std::vector<S2Point>> splitEdgeList(S2PolygonBuil
 // Construct a S2Polygon from a list of three column matrices from R
 void S2PolygonInitFromR(List list, S2Polygon& poly){
   // std::string S3class = list.attr("class");
-  // if(S3class == "s2polygon"){ list = list[1]; }
+  // if(S3class == "S2Polygon"){ list = list[1]; }
   int n = list.size();
   S2PolygonBuilderOptions pbo;
   S2PolygonBuilder pb(pbo);
