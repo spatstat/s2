@@ -43,7 +43,7 @@ std::vector<S2Point> s2point_interpolate(std::vector<S2Point> points, double eps
 //' correspond to no interpolation.
 //' @export S2Point_interpolate
 //[[Rcpp::export]]
-SEXP S2Point_interpolate(NumericMatrix x, double eps){
+NumericMatrix S2Point_interpolate(NumericMatrix x, double eps){
   std::vector<S2Point> points  = S2PointVecFromR(x);
-  return wrap(s2point_interpolate(points, eps));
+  return S2PointVecToR(s2point_interpolate(points, eps));
 }

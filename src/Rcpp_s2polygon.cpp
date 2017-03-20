@@ -94,7 +94,8 @@ List S2PolygonBuild(List x, bool validate = true, bool xor_edges = true,
   S2PolygonBuilder pb(pbo);
   bool tmp;
   for(int i = 0; i < n; i++){
-    std::vector<S2Point> points = as<std::vector<S2Point>>(x[i]);
+    // std::vector<S2Point> points = as<std::vector<S2Point>>(x[i]);
+    std::vector<S2Point> points = S2PointVecFromR(x[i]);
     S2Loop tmp;
     tmp.Init(points);
     pb.AddLoop(&tmp);
@@ -107,8 +108,8 @@ List S2PolygonBuild(List x, bool validate = true, bool xor_edges = true,
     Rcout << "There were unused loops/edges due to inconsistencies such as self-intersection." << std::endl;
     Rcout << "See 'unused' attribute of output." << std::endl;
     std::pair<std::vector<S2Point>,std::vector<S2Point>> start_end = splitEdgeList(unused_edges);
-    rslt.attr("unused") = List::create( Named("start") = wrap(start_end.first),
-                                        Named("end")   = wrap(start_end.second));
+    rslt.attr("unused") = List::create( Named("start") = S2PointVecToR(start_end.first),
+                                        Named("end")   = S2PointVecToR(start_end.second));
   }
   return rslt;
 }

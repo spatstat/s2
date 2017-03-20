@@ -92,7 +92,7 @@ SEXP S2CellId_ToPoint(std::vector<std::string> x){
   for(int i=0; i<n; i++){
     output[i] = ids[i].ToPoint();
   }
-  return wrap(output);
+  return S2PointVecToR(output);
 }
 
 //' Make a vector of S2CellId strings

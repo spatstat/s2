@@ -125,7 +125,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // S2Point_interpolate
-SEXP S2Point_interpolate(NumericMatrix x, double eps);
+NumericMatrix S2Point_interpolate(NumericMatrix x, double eps);
 RcppExport SEXP s2_S2Point_interpolate(SEXP xSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
