@@ -3,7 +3,8 @@
 
 #include <RcppCommon.h>
 #include <vector>
-#include "s2/s2.h"
+#include "util/math/vector3.h"
+typedef Vector3<double> S2Point;
 
 namespace Rcpp {
   template<> std::vector<S2Point> as( SEXP );
@@ -14,6 +15,8 @@ namespace Rcpp {
     template <typename T> class Exporter< Vector3<T> >;
   }
 }
+
+#include <Rcpp.h>
 
 // Manual functions to interface C++ and R types for when Rcpp::as and Rcpp::wrap
 // Don't work (the compiler can't automatically figure out what to do, and I
