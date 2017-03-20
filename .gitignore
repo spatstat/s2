@@ -39,3 +39,6 @@ vignettes/*.pdf
 
 # Generated Makevars
 src/Makevars
+
+# Misc local files
+misc
