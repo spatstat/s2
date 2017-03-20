@@ -7,6 +7,6 @@
 #' concept has been achieved more of the underlying features will be made
 #' available to the useR.
 #'
-#' @useDynLib s2
+#' @useDynLib s2, .registration = TRUE
 #' @import Rcpp methods
 "_PACKAGE"
