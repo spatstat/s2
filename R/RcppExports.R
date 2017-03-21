@@ -34,8 +34,7 @@ S2Cap_area <- function(cap) {
 #'
 #' @param x Three-column matrix reprensenting the points.
 #' @param level Integer between 0 and 30 (incl).
-#' @return A character vector with S2CellIds with the additional class
-#' `S2CellId`.
+#' @return An object of class `S2CellId`.
 #' @export S2CellIdFromPoint
 S2CellIdFromPoint <- function(x, level = 30L) {
     .Call('s2_S2CellIdFromPoint', PACKAGE = 's2', x, level)

@@ -41,13 +41,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // S2CellIdFromPoint
-CharacterVector S2CellIdFromPoint(NumericMatrix x, int level);
+List S2CellIdFromPoint(NumericMatrix x, IntegerVector level);
 RcppExport SEXP s2_S2CellIdFromPoint(SEXP xSEXP, SEXP levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type level(levelSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type level(levelSEXP);
     rcpp_result_gen = Rcpp::wrap(S2CellIdFromPoint(x, level));
     return rcpp_result_gen;
 END_RCPP

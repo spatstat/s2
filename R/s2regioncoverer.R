@@ -31,14 +31,15 @@ S2Covering <- function(x, max_cells, min_level, max_level, interior = FALSE){
 #'
 #' Make a list of S2Cells
 #'
-#' @param x Input to create cells from. Currently only a vector of S2CellId tokens are supported.
+#' @param x Input to create cells from. Currently only an object of class
+#' S2CellId is supported.
 #'
 #' @export
 S2Cell <- function(x){
   # if(inherits(x, "S2Covering"))
   #   x <- x$id
-  v <- S2Cell_vertices_from_token(x)
-  rslt <- list(id = x, vertices = v)
+  v <- S2Cell_vertices_from_token(x$id)
+  rslt <- append(x, list(vertices = v))
   class(rslt) <- "S2Cell"
   return(rslt)
 }

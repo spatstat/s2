@@ -12,8 +12,7 @@ S2CellIdFromPoint(x, level = 30L)
 \item{level}{Integer between 0 and 30 (incl).}
 }
 \value{
-A character vector with S2CellIds with the additional class
-`S2CellId`.
+An object of class `S2CellId`.
 }
 \description{
 Create a vector of S2CellIds corresponding to the cells at the given level 

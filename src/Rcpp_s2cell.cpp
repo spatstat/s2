@@ -15,30 +15,41 @@ S2Cap R_S2CapFromList(List);
 // Declare function from Rcpp_s2polygon.cpp
 void S2PolygonInitFromR(List, S2Polygon&);
 
-std::vector<S2CellId> S2CellId_FromS2Point(std::vector<S2Point> x, int level){
+std::vector<S2CellId> S2CellId_FromS2Point(std::vector<S2Point> x, IntegerVector level){
   int n = x.size();
+  int nlev = level.size();
+  int lev = level[0];
   std::vector<S2CellId> rslt(n);
-  if(level==30){
+  if(nlev == 1 & lev == 30){
+    // Default case of single level == 30
     for(int i=0; i<n; i++){
       rslt[i] = S2CellId::FromPoint(x[i]);
     }
   } else{
+    // Generic case
     for(int i=0; i<n; i++){
-      auto tmp = S2CellId::FromPoint(x[i]);
-      rslt[i] = tmp.parent(level);
+      if(nlev > 1){
+        lev = level[i];
+      }
+      rslt[i] = S2CellId::FromPoint(x[i]);
+      if(lev!=30){
+        rslt[i] = rslt[i].parent(lev);
+      }
     }
   }
   return rslt;
 }
 
-CharacterVector S2CellIdWrapForR(std::vector<S2CellId> ids){
+List S2CellIdWrapForR(std::vector<S2CellId> ids, IntegerVector levels){
   int n = ids.size();
   CharacterVector tokens(n);
   for(int i=0; i<n; i++){
     tokens[i] = ids[i].ToToken();
   }
-  tokens.attr("class") = "S2CellId";
-  return tokens;
+  List rslt = List::create(Named("id") = tokens,
+                           Named("level") = levels);
+  rslt.attr("class") = "S2CellId";
+  return rslt;
 }
 
 CharacterVector S2CellIdStringWrapForR(std::vector<S2CellId> ids){
@@ -67,14 +78,13 @@ std::vector<S2CellId> R_S2CellIdFromTokens(std::vector<std::string> tokens){
 //'
 //' @param x Three-column matrix reprensenting the points.
 //' @param level Integer between 0 and 30 (incl).
-//' @return A character vector with S2CellIds with the additional class
-//' `S2CellId`.
+//' @return An object of class `S2CellId`.
 //' @export S2CellIdFromPoint
 //[[Rcpp::export]]
-CharacterVector S2CellIdFromPoint(NumericMatrix x, int level = 30){
+List S2CellIdFromPoint(NumericMatrix x, IntegerVector level = 30){
   auto points = S2PointVecFromR(x);
   auto ids = S2CellId_FromS2Point(points, level);
-  return S2CellIdWrapForR(ids);
+  return S2CellIdWrapForR(ids, level);
 }
 
 //' Convert S2CellId to a S2Point
@@ -197,5 +207,10 @@ List S2Covering_internal(List x, std::string type, int max_cells, int min_level,
   } else{
     stop("Type must be s2cap or s2polygon.");
   }
-  return List::create(Named("id") = S2CellIdWrapForR(covering));
+  int n = covering.size();
+  IntegerVector level(n);
+  for(int i=0; i<n; i++){
+    level[i] = covering[i].level();
+  }
+  return S2CellIdWrapForR(covering, level);
 }
