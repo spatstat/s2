@@ -36,8 +36,8 @@ else
   if [ $? -eq 0 ]; then
     BREWDIR=`brew --prefix`
   else
-    curl -sfL https://jeroen.github.io/autobrew/$PKG_BREW_NAME > $TMPDIR/autobrew
-    source $TMPDIR/autobrew
+    curl -sfL https://jeroen.github.io/autobrew/$PKG_BREW_NAME > autobrew
+    source autobrew
   fi
   PKG_CXXFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include"
   PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
