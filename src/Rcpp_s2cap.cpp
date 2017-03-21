@@ -7,7 +7,7 @@ using namespace Rcpp;
 // Wrap an S2Cap as a list in R with:
 // [[1]] The axis as a 3D unit vector
 // [[2]] The height as a numeric
-List S2CapWrapForR(const S2Cap& cap){
+List S2CapToR(const S2Cap& cap){
   NumericVector axis(3);
   S2Point a = cap.axis();
   axis[0] = a.x();
@@ -29,7 +29,7 @@ List S2CapWrapForR(const S2Cap& cap){
 //[[Rcpp::export]]
 List S2CapFromAxisHeight(NumericVector axis, double height){
   S2Point a = S2Point(axis[0], axis[1], axis[2]);
-  return S2CapWrapForR(S2Cap::FromAxisHeight(a, height));
+  return S2CapToR(S2Cap::FromAxisHeight(a, height));
 }
 
 S2Cap R_S2CapFromList(List list){
