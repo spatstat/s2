@@ -2,6 +2,7 @@
 #define S2PACKAGE_TYPES_H_
 
 #include "s2/s2.h"
+#include "s2/s2cap.h"
 
 #include <Rcpp.h>
 
@@ -13,5 +14,10 @@
 std::vector<S2Point> S2PointVecFromR(Rcpp::NumericMatrix mat);
 // Export a vector of `S2Point`s to a three column matrix in R.
 Rcpp::NumericMatrix S2PointVecToR(std::vector<S2Point> points);
+
+// Get a S2Cap from a list in R.
+S2Cap S2CapFromR(Rcpp::List list);
+// Export S2Cap to list in R.
+Rcpp::List S2CapToR(const S2Cap& cap);
 
 #endif  // S2PACKAGE_TYPES_H_

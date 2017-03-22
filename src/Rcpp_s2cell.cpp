@@ -9,9 +9,6 @@
 
 using namespace Rcpp;
 
-// Declare function from Rcpp_s2cap.cpp
-S2Cap R_S2CapFromList(List);
-
 // Declare function from Rcpp_s2polygon.cpp
 void S2PolygonInitFromR(List, S2Polygon&);
 
@@ -191,7 +188,7 @@ List S2Covering_internal(List x, std::string type, int max_cells, int min_level,
     coverer.set_max_level(max_level);
   vector<S2CellId> covering;
   if(type == "s2cap"){
-    S2Cap region = R_S2CapFromList(x);
+    S2Cap region = S2CapFromR(x);
     if(interior){
       coverer.GetInteriorCovering(region, &covering);
     } else{

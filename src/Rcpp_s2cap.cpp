@@ -19,6 +19,13 @@ List S2CapToR(const S2Cap& cap){
   return rslt;
 }
 
+S2Cap S2CapFromR(List list){
+  NumericVector axis = list["axis"];
+  double height = list["height"];
+  S2Point a = S2Point(axis[0], axis[1], axis[2]);
+  return S2Cap::FromAxisHeight(a, height);
+}
+
 //' Construct a S2Cap using axis and height
 //'
 //' Constructs a S2Cap from axis and height
@@ -32,16 +39,9 @@ List S2CapFromAxisHeight(NumericVector axis, double height){
   return S2CapToR(S2Cap::FromAxisHeight(a, height));
 }
 
-S2Cap R_S2CapFromList(List list){
-  NumericVector axis = list["axis"];
-  double height = list["height"];
-  S2Point a = S2Point(axis[0], axis[1], axis[2]);
-  return S2Cap::FromAxisHeight(a, height);
-}
-
 //[[Rcpp::export]]
 LogicalVector S2Cap_contains_point(NumericMatrix points, List cap){
-  S2Cap c = R_S2CapFromList(cap);
+  S2Cap c = S2CapFromR(cap);
   auto s2points = S2PointVecFromR(points);
   int n = s2points.size();
   LogicalVector rslt(n);
@@ -59,6 +59,6 @@ LogicalVector S2Cap_contains_point(NumericMatrix points, List cap){
 //' @export S2Cap_area
 //[[Rcpp::export]]
 double S2Cap_area(List cap){
-  S2Cap c = R_S2CapFromList(cap);
+  S2Cap c = S2CapFromR(cap);
   return c.area();
 }
