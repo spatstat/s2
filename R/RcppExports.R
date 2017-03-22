@@ -44,7 +44,7 @@ S2CellIdFromPoint <- function(x, level = 30L) {
 #'
 #' Convert S2CellId to a S2Point
 #'
-#' @param x Character vector of S2CellIds in token form.
+#' @param x Object of class S2CellId.
 #' @return Three-column matrix reprensenting the points..
 #' @export S2CellId_ToPoint
 S2CellId_ToPoint <- function(x) {

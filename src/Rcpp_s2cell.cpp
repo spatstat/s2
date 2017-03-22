@@ -91,13 +91,14 @@ List S2CellIdFromPoint(NumericMatrix x, IntegerVector level = 30){
 //'
 //' Convert S2CellId to a S2Point
 //'
-//' @param x Character vector of S2CellIds in token form.
+//' @param x Object of class S2CellId.
 //' @return Three-column matrix reprensenting the points..
 //' @export S2CellId_ToPoint
 //[[Rcpp::export]]
-SEXP S2CellId_ToPoint(std::vector<std::string> x){
-  auto ids = R_S2CellIdFromTokens(x);
-  int n = x.size();
+NumericMatrix S2CellId_ToPoint(List x){
+  std::vector<std::string> tokens = x["id"];
+  auto ids = R_S2CellIdFromTokens(tokens);
+  int n = tokens.size();
   std::vector<S2Point> output(n);
   for(int i=0; i<n; i++){
     output[i] = ids[i].ToPoint();

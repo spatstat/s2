@@ -53,12 +53,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // S2CellId_ToPoint
-SEXP S2CellId_ToPoint(std::vector<std::string> x);
+NumericMatrix S2CellId_ToPoint(List x);
 RcppExport SEXP s2_S2CellId_ToPoint(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(S2CellId_ToPoint(x));
     return rcpp_result_gen;
 END_RCPP
