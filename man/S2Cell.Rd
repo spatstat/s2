@@ -7,7 +7,8 @@
 S2Cell(x)
 }
 \arguments{
-\item{x}{Input to create cells from. Currently only a vector of S2CellId tokens are supported.}
+\item{x}{Input to create cells from. Currently only an object of class
+S2CellId is supported.}
 }
 \description{
 Make a list of S2Cells

@@ -7,7 +7,7 @@
 S2CellId_ToPoint(x)
 }
 \arguments{
-\item{x}{Character vector of S2CellIds in token form.}
+\item{x}{Object of class S2CellId.}
 }
 \value{
 Three-column matrix reprensenting the points..
