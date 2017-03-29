@@ -1,6 +1,7 @@
 #include "Rcpp_datatypes.h"
 #include <Rcpp.h>
 #include <s2/s2cap.h>
+#include <s2/s2latlngrect.h>
 
 using namespace Rcpp;
 
@@ -61,4 +62,17 @@ LogicalVector S2Cap_contains_point(NumericMatrix points, List cap){
 double S2Cap_area(List cap){
   S2Cap c = S2CapFromR(cap);
   return c.area();
+}
+
+//' Bounding latitude and longitude rectangle for spherical cap
+//'
+//' Bounding latitude and longitude rectangle for spherical cap
+//' 
+//' @param x cap
+//' @export
+//[[Rcpp::export]]
+List S2Cap_GetRectBound(List x){
+  S2Cap cap = S2CapFromR(x);
+  S2LatLngRect rect = cap.GetRectBound();
+  return S2LatLngRectToR(rect);
 }

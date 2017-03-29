@@ -31,10 +31,12 @@ List S2PolygonWrapForR(const S2Polygon& poly){
     }
     out_loops[i] = loop_i;
   }
-  bool valid = poly.IsValid();
+  // bool valid = poly.IsValid();
+  S2LatLngRect bound = poly.GetRectBound();
   auto rslt = List::create(Named("loops") = out_loops,
                            Named("areas") = areas,
-                           Named("holes") = holes);
+                           Named("holes") = holes,
+                           Named("bound") = S2LatLngRectToR(bound));
   rslt.attr( "class" ) = "S2Polygon" ;
   return rslt;
 }

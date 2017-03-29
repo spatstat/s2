@@ -40,6 +40,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// S2Cap_GetRectBound
+List S2Cap_GetRectBound(List x);
+RcppExport SEXP s2_S2Cap_GetRectBound(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Cap_GetRectBound(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // S2CellIdFromPoint
 List S2CellIdFromPoint(NumericMatrix x, IntegerVector level);
 RcppExport SEXP s2_S2CellIdFromPoint(SEXP xSEXP, SEXP levelSEXP) {
@@ -121,6 +132,29 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type max_level(max_levelSEXP);
     Rcpp::traits::input_parameter< bool >::type interior(interiorSEXP);
     rcpp_result_gen = Rcpp::wrap(S2Covering_internal(x, type, max_cells, min_level, max_level, interior));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2LatLngRect
+List S2LatLngRect(NumericVector lo, NumericVector hi);
+RcppExport SEXP s2_S2LatLngRect(SEXP loSEXP, SEXP hiSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type lo(loSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type hi(hiSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2LatLngRect(lo, hi));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2LatLngRect_area
+double S2LatLngRect_area(List x);
+RcppExport SEXP s2_S2LatLngRect_area(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2LatLngRect_area(x));
     return rcpp_result_gen;
 END_RCPP
 }

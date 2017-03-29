@@ -27,6 +27,9 @@ extern SEXP s2_S2Polygon_intersection(SEXP, SEXP);
 extern SEXP s2_S2Polygon_union(SEXP, SEXP);
 extern SEXP s2_S2PolygonBuild(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP s2_S2Polyline_dist(SEXP, SEXP);
+extern SEXP s2_S2Cap_GetRectBound(SEXP);
+extern SEXP s2_S2LatLngRect(SEXP, SEXP);
+extern SEXP s2_S2LatLngRect_area(SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
   {"s2_S2Cap_area",                 (DL_FUNC) &s2_S2Cap_area,                 1},
@@ -45,6 +48,9 @@ static const R_CallMethodDef CallEntries[] = {
   {"s2_S2Polygon_union",            (DL_FUNC) &s2_S2Polygon_union,            2},
   {"s2_S2PolygonBuild",             (DL_FUNC) &s2_S2PolygonBuild,             6},
   {"s2_S2Polyline_dist",            (DL_FUNC) &s2_S2Polyline_dist,            2},
+  {"s2_S2Cap_GetRectBound",         (DL_FUNC) &s2_S2Cap_GetRectBound,         1},
+  {"s2_S2LatLngRect",               (DL_FUNC) &s2_S2LatLngRect,               2},
+  {"s2_S2LatLngRect_area",          (DL_FUNC) &s2_S2LatLngRect_area,          1},
   {NULL, NULL, 0}
 };
 

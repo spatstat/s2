@@ -20,4 +20,14 @@ S2Cap S2CapFromR(Rcpp::List list);
 // Export S2Cap to list in R.
 Rcpp::List S2CapToR(const S2Cap& cap);
 
+// Get a vector of `S2LatLng`s from a two column matrix from R.
+std::vector<S2LatLng> S2LatLngVecFromR(Rcpp::NumericMatrix mat);
+// Wrap a vector of `S2LatLng`s to a two column matrix in R.
+Rcpp::NumericMatrix S2LatLngVecToR(std::vector<S2LatLng> points);
+
+// Get a S2LatLngRect from a list in R.
+S2LatLngRect S2LatLngRectFromR(Rcpp::List list);
+// Export S2LatLngRect to list in R.
+Rcpp::List S2LatLngRectToR(const S2LatLngRect& cap);
+
 #endif  // S2PACKAGE_TYPES_H_

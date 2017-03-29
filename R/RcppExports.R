@@ -26,6 +26,16 @@ S2Cap_area <- function(cap) {
     .Call('s2_S2Cap_area', PACKAGE = 's2', cap)
 }
 
+#' Bounding latitude and longitude rectangle for spherical cap
+#'
+#' Bounding latitude and longitude rectangle for spherical cap
+#' 
+#' @param x cap
+#' @export
+S2Cap_GetRectBound <- function(x) {
+    .Call('s2_S2Cap_GetRectBound', PACKAGE = 's2', x)
+}
+
 #' Make a Vector of S2CellIds From Points on the Sphere
 #'
 #' Create a vector of S2CellIds corresponding to the cells at the given level 
@@ -76,6 +86,27 @@ S2Cell_grid_centers <- function(level) {
 
 S2Covering_internal <- function(x, type, max_cells, min_level, max_level, interior) {
     .Call('s2_S2Covering_internal', PACKAGE = 's2', x, type, max_cells, min_level, max_level, interior)
+}
+
+#' Create a rectangle of latitude and longitude on the sphere
+#'
+#' Create a rectangle of latitude and longitude on the sphere
+#' 
+#' @param lo Latitude and longitude (in that order) in degrees of lower left corner.
+#' @param hi Latitude and longitude (in that order) in degrees of upper right corner.
+#' @export S2LatLngRect
+S2LatLngRect <- function(lo, hi) {
+    .Call('s2_S2LatLngRect', PACKAGE = 's2', lo, hi)
+}
+
+#' Area of s2latlngrect
+#'
+#' Area of a S2LatLngRect.
+#'
+#' @param x Named list containing axis and height of cap.
+#' @export S2LatLngRect_area
+S2LatLngRect_area <- function(x) {
+    .Call('s2_S2LatLngRect_area', PACKAGE = 's2', x)
 }
 
 #' Interpolation of points on unit sphere

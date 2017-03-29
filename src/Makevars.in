@@ -2,7 +2,7 @@ $(info The compilation root directory is: $(ROOT_DIR))
 $(info The name of the shared library to be created is: $(SHLIB))               
 
 CXX_STD = CXX11
-PKG_CPPFLAGS = -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -DNDEBUG -I../inst/include -I../inst/include/s2 -I../inst/include/base -I../inst/include/strings -I../inst/include/util/hash
+PKG_CPPFLAGS = -DS2_USE_EXACTFLOAT -DHASH_NAMESPACE=std -I../inst/include -I../inst/include/s2 -I../inst/include/base -I../inst/include/strings -I../inst/include/util/hash
 PKG_LIBS = @libs@
 PKG_CXXFLAGS = @cxxflags@ -pthread
 
@@ -52,6 +52,8 @@ OBJECTS_RCPP= \
   Rcpp_datatypes.o \
   Rcpp_s2cap.o \
   Rcpp_s2cell.o \
+  Rcpp_s2latlng.o \
+  Rcpp_s2latlngrect.o \
   Rcpp_s2point.o \
   Rcpp_s2polygon.o \
   RcppExports.o
