@@ -55,8 +55,8 @@ echo "Using PKG_LIBS=$PKG_LIBS"
 
 # Find compiler
 CXX11VAR=`"${R_HOME}/bin/Rscript" -e 'if(getRversion() < "3.4") cat("CXX1X\\n") else cat("CXX11\\n")'`
-CXX1X=`${R_HOME}/bin/R CMD config ${CXX11VAR}`
-CXX1XFLAGS=`${R_HOME}/bin/R CMD config ${CXX11VAR}FLAGS`
+CXX1X=`${R_HOME}/bin/R CMD config "${CXX11VAR}"`
+CXX1XFLAGS=`${R_HOME}/bin/R CMD config "${CXX11VAR}FLAGS"`
 CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 
 # Test configuration
