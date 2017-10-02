@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // S2CapFromAxisHeight
 List S2CapFromAxisHeight(NumericVector axis, double height);
-RcppExport SEXP s2_S2CapFromAxisHeight(SEXP axisSEXP, SEXP heightSEXP) {
+RcppExport SEXP _s2_S2CapFromAxisHeight(SEXP axisSEXP, SEXP heightSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // S2Cap_contains_point
 LogicalVector S2Cap_contains_point(NumericMatrix points, List cap);
-RcppExport SEXP s2_S2Cap_contains_point(SEXP pointsSEXP, SEXP capSEXP) {
+RcppExport SEXP _s2_S2Cap_contains_point(SEXP pointsSEXP, SEXP capSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -31,7 +31,7 @@ END_RCPP
 }
 // S2Cap_area
 double S2Cap_area(List cap);
-RcppExport SEXP s2_S2Cap_area(SEXP capSEXP) {
+RcppExport SEXP _s2_S2Cap_area(SEXP capSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -42,7 +42,7 @@ END_RCPP
 }
 // S2Cap_GetRectBound
 List S2Cap_GetRectBound(List x);
-RcppExport SEXP s2_S2Cap_GetRectBound(SEXP xSEXP) {
+RcppExport SEXP _s2_S2Cap_GetRectBound(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -53,7 +53,7 @@ END_RCPP
 }
 // S2CellIdFromPoint
 List S2CellIdFromPoint(NumericMatrix x, IntegerVector level);
-RcppExport SEXP s2_S2CellIdFromPoint(SEXP xSEXP, SEXP levelSEXP) {
+RcppExport SEXP _s2_S2CellIdFromPoint(SEXP xSEXP, SEXP levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -65,7 +65,7 @@ END_RCPP
 }
 // S2CellId_ToPoint
 NumericMatrix S2CellId_ToPoint(List x);
-RcppExport SEXP s2_S2CellId_ToPoint(SEXP xSEXP) {
+RcppExport SEXP _s2_S2CellId_ToPoint(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -76,7 +76,7 @@ END_RCPP
 }
 // S2CellId_ToString
 CharacterVector S2CellId_ToString(std::vector<std::string> x);
-RcppExport SEXP s2_S2CellId_ToString(SEXP xSEXP) {
+RcppExport SEXP _s2_S2CellId_ToString(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -87,7 +87,7 @@ END_RCPP
 }
 // S2Cell_vertices_from_token
 List S2Cell_vertices_from_token(std::vector<std::string> tokens);
-RcppExport SEXP s2_S2Cell_vertices_from_token(SEXP tokensSEXP) {
+RcppExport SEXP _s2_S2Cell_vertices_from_token(SEXP tokensSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -98,7 +98,7 @@ END_RCPP
 }
 // S2Cell_vertices_from_point
 List S2Cell_vertices_from_point(NumericMatrix mat, int level);
-RcppExport SEXP s2_S2Cell_vertices_from_point(SEXP matSEXP, SEXP levelSEXP) {
+RcppExport SEXP _s2_S2Cell_vertices_from_point(SEXP matSEXP, SEXP levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -110,7 +110,7 @@ END_RCPP
 }
 // S2Cell_grid_centers
 NumericMatrix S2Cell_grid_centers(int level);
-RcppExport SEXP s2_S2Cell_grid_centers(SEXP levelSEXP) {
+RcppExport SEXP _s2_S2Cell_grid_centers(SEXP levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -121,7 +121,7 @@ END_RCPP
 }
 // S2Covering_internal
 List S2Covering_internal(List x, std::string type, int max_cells, int min_level, int max_level, bool interior);
-RcppExport SEXP s2_S2Covering_internal(SEXP xSEXP, SEXP typeSEXP, SEXP max_cellsSEXP, SEXP min_levelSEXP, SEXP max_levelSEXP, SEXP interiorSEXP) {
+RcppExport SEXP _s2_S2Covering_internal(SEXP xSEXP, SEXP typeSEXP, SEXP max_cellsSEXP, SEXP min_levelSEXP, SEXP max_levelSEXP, SEXP interiorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -137,7 +137,7 @@ END_RCPP
 }
 // S2LatLngRect
 List S2LatLngRect(NumericVector lo, NumericVector hi);
-RcppExport SEXP s2_S2LatLngRect(SEXP loSEXP, SEXP hiSEXP) {
+RcppExport SEXP _s2_S2LatLngRect(SEXP loSEXP, SEXP hiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -149,7 +149,7 @@ END_RCPP
 }
 // S2LatLngRect_area
 double S2LatLngRect_area(List x);
-RcppExport SEXP s2_S2LatLngRect_area(SEXP xSEXP) {
+RcppExport SEXP _s2_S2LatLngRect_area(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -160,7 +160,7 @@ END_RCPP
 }
 // S2Point_interpolate
 NumericMatrix S2Point_interpolate(NumericMatrix x, double eps);
-RcppExport SEXP s2_S2Point_interpolate(SEXP xSEXP, SEXP epsSEXP) {
+RcppExport SEXP _s2_S2Point_interpolate(SEXP xSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -172,7 +172,7 @@ END_RCPP
 }
 // S2PolygonBuild
 List S2PolygonBuild(List x, bool validate, bool xor_edges, double vertex_merge_radius, double edge_splice_fraction, bool undirected_edges);
-RcppExport SEXP s2_S2PolygonBuild(SEXP xSEXP, SEXP validateSEXP, SEXP xor_edgesSEXP, SEXP vertex_merge_radiusSEXP, SEXP edge_splice_fractionSEXP, SEXP undirected_edgesSEXP) {
+RcppExport SEXP _s2_S2PolygonBuild(SEXP xSEXP, SEXP validateSEXP, SEXP xor_edgesSEXP, SEXP vertex_merge_radiusSEXP, SEXP edge_splice_fractionSEXP, SEXP undirected_edgesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -188,7 +188,7 @@ END_RCPP
 }
 // S2Polygon_union
 List S2Polygon_union(List x, List y);
-RcppExport SEXP s2_S2Polygon_union(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _s2_S2Polygon_union(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -200,7 +200,7 @@ END_RCPP
 }
 // S2Polygon_intersection
 List S2Polygon_intersection(List x, List y);
-RcppExport SEXP s2_S2Polygon_intersection(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _s2_S2Polygon_intersection(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -210,9 +210,55 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// S2Polygons_intersection
+List S2Polygons_intersection(List x, List y);
+RcppExport SEXP _s2_S2Polygons_intersection(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< List >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Polygons_intersection(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Polygons_intersect
+List S2Polygons_intersect(List x, List y);
+RcppExport SEXP _s2_S2Polygons_intersect(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    Rcpp::traits::input_parameter< List >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Polygons_intersect(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Polygons_centroid
+NumericMatrix S2Polygons_centroid(List x);
+RcppExport SEXP _s2_S2Polygons_centroid(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Polygons_centroid(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// S2Polygons_area
+NumericVector S2Polygons_area(List x);
+RcppExport SEXP _s2_S2Polygons_area(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Polygons_area(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // S2Polygon_contains_point
 LogicalVector S2Polygon_contains_point(NumericMatrix points, List poly, bool approx);
-RcppExport SEXP s2_S2Polygon_contains_point(SEXP pointsSEXP, SEXP polySEXP, SEXP approxSEXP) {
+RcppExport SEXP _s2_S2Polygon_contains_point(SEXP pointsSEXP, SEXP polySEXP, SEXP approxSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -225,7 +271,7 @@ END_RCPP
 }
 // S2Polyline_dist
 NumericVector S2Polyline_dist(NumericMatrix line, NumericMatrix x);
-RcppExport SEXP s2_S2Polyline_dist(SEXP lineSEXP, SEXP xSEXP) {
+RcppExport SEXP _s2_S2Polyline_dist(SEXP lineSEXP, SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -234,4 +280,36 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(S2Polyline_dist(line, x));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_s2_S2CapFromAxisHeight", (DL_FUNC) &_s2_S2CapFromAxisHeight, 2},
+    {"_s2_S2Cap_contains_point", (DL_FUNC) &_s2_S2Cap_contains_point, 2},
+    {"_s2_S2Cap_area", (DL_FUNC) &_s2_S2Cap_area, 1},
+    {"_s2_S2Cap_GetRectBound", (DL_FUNC) &_s2_S2Cap_GetRectBound, 1},
+    {"_s2_S2CellIdFromPoint", (DL_FUNC) &_s2_S2CellIdFromPoint, 2},
+    {"_s2_S2CellId_ToPoint", (DL_FUNC) &_s2_S2CellId_ToPoint, 1},
+    {"_s2_S2CellId_ToString", (DL_FUNC) &_s2_S2CellId_ToString, 1},
+    {"_s2_S2Cell_vertices_from_token", (DL_FUNC) &_s2_S2Cell_vertices_from_token, 1},
+    {"_s2_S2Cell_vertices_from_point", (DL_FUNC) &_s2_S2Cell_vertices_from_point, 2},
+    {"_s2_S2Cell_grid_centers", (DL_FUNC) &_s2_S2Cell_grid_centers, 1},
+    {"_s2_S2Covering_internal", (DL_FUNC) &_s2_S2Covering_internal, 6},
+    {"_s2_S2LatLngRect", (DL_FUNC) &_s2_S2LatLngRect, 2},
+    {"_s2_S2LatLngRect_area", (DL_FUNC) &_s2_S2LatLngRect_area, 1},
+    {"_s2_S2Point_interpolate", (DL_FUNC) &_s2_S2Point_interpolate, 2},
+    {"_s2_S2PolygonBuild", (DL_FUNC) &_s2_S2PolygonBuild, 6},
+    {"_s2_S2Polygon_union", (DL_FUNC) &_s2_S2Polygon_union, 2},
+    {"_s2_S2Polygon_intersection", (DL_FUNC) &_s2_S2Polygon_intersection, 2},
+    {"_s2_S2Polygons_intersection", (DL_FUNC) &_s2_S2Polygons_intersection, 2},
+    {"_s2_S2Polygons_intersect", (DL_FUNC) &_s2_S2Polygons_intersect, 2},
+    {"_s2_S2Polygons_centroid", (DL_FUNC) &_s2_S2Polygons_centroid, 1},
+    {"_s2_S2Polygons_area", (DL_FUNC) &_s2_S2Polygons_area, 1},
+    {"_s2_S2Polygon_contains_point", (DL_FUNC) &_s2_S2Polygon_contains_point, 3},
+    {"_s2_S2Polyline_dist", (DL_FUNC) &_s2_S2Polyline_dist, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_s2(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

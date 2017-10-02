@@ -44,7 +44,6 @@ OBJECTS_S2= \
   geometry/s2regionunion.o
  
 OBJECTS_RCPP= \
-  s2-init.o \
   Rcpp_datatypes.o \
   Rcpp_s2cap.o \
   Rcpp_s2cell.o \

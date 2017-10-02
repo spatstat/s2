@@ -11,12 +11,15 @@ Description: R bindings for Google's s2 library for geometric calculations on
     the sphere.
 License: Apache License (== 2.0)
 Depends: R (>= 3.0.0)
-Imports:
-    methods, Rcpp (>= 0.12.5)
-Suggests:
-    globe
-URL: https://github.com/spatstat/s2, https://code.google.com/archive/p/s2-geometry-library/
+Imports: methods, Rcpp (>= 0.12.5)
+Suggests: globe
+URL: https://github.com/spatstat/s2,
+        https://code.google.com/archive/p/s2-geometry-library/
 SystemRequirements: OpenSSL >= 1.0.0, C++11
 LinkingTo: Rcpp
 NeedsCompilation: yes
 RoxygenNote: 6.0.1.9000
+Author: Ege Rubak [aut, cre],
+  Jeroen Ooms [aut] (configure and cleanup script),
+  Google, Inc. [cph] (Original s2 source code)
+Maintainer: Ege Rubak <rubak@math.aau.dk>
