@@ -150,6 +150,108 @@ List S2Polygon_intersection(List x, List y){
   return S2PolygonWrapForR(poly12);
 }
 
+//' intersection of sets of s2polygons
+//'
+//' this function generalizes S2Polygon_intersection, by allowing two lists of
+//' polygons, each list element equal to a polygon of that function.
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @param y List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_intersection
+//' @export S2Polygons_intersection
+//[[Rcpp::export]]
+List S2Polygons_intersection(List x, List y){
+  std::vector<S2Polygon> polx(x.size());
+  std::vector<S2Polygon> poly(y.size());
+  List rslt(x.size() * y.size());
+  for (size_t i = 0; i < x.size(); i++)
+    S2PolygonInitFromR(x[i], polx[i]);
+  for (size_t j = 0; j < y.size(); j++)
+    S2PolygonInitFromR(y[j], poly[j]);
+  size_t n_empty = 0;
+  for (size_t i = 0; i < x.size(); i++) {
+    for (size_t j = 0; j < y.size(); j++) {
+      S2Polygon poly12;
+      if (polx[i].Intersects(&(poly[j])))
+        poly12.InitToIntersection(&(polx[i]), &(poly[j]));
+      if (poly12.num_loops() == 0)
+        n_empty++;
+      rslt[(i * y.size()) + j] = S2PolygonWrapForR(poly12);
+    }
+  }
+  rslt.attr( "class" ) = "S2Polygons";
+  rslt.attr( "n_empty" ) = n_empty;
+  return rslt;
+}
+
+//' for two sets of s2polygons, which ones intersect?
+//'
+//' this function is equivalent to \link[sf]{st_intersects}, in that it
+//' returns a sparse matrix with indexes for pairs of intersecting polygons
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @param y List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_intersect
+//' @export S2Polygons_intersect
+//[[Rcpp::export]]
+List S2Polygons_intersect(List x, List y) {
+  std::vector<S2Polygon> polx(x.size());
+  std::vector<S2Polygon> poly(y.size());
+  List rslt(x.size());
+  for (size_t i = 0; i < x.size(); i++)
+    S2PolygonInitFromR(x[i], polx[i]);
+  for (size_t j = 0; j < y.size(); j++)
+    S2PolygonInitFromR(y[j], poly[j]);
+  for (size_t i = 0; i < x.size(); i++) {
+    std::vector<int> indx;
+    for (size_t j = 0; j < y.size(); j++) {
+      if (polx[i].Intersects(&(poly[j])))
+        indx.push_back(j + 1);
+    }
+    rslt[i] = indx;
+  }
+  return rslt;
+}
+
+//' compute centroids for a list of s2polygons
+//'
+//' this function is equivalent to \link[sf]{st_centroid}, in that it
+//' returns a numeric vector with polygon centroids
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_centroid
+//' @export S2Polygons_centroid
+//[[Rcpp::export]]
+NumericMatrix S2Polygons_centroid(List x) {
+  std::vector<S2Point> points(x.size());
+  S2Polygon s2poly;
+  for (size_t i = 0; i < x.size(); i++) {
+    S2PolygonInitFromR(x[i], s2poly);
+    points[i] = s2poly.GetCentroid() / s2poly.GetArea();
+  }
+  return S2PointVecToR(points);
+}
+
+//' compute areas for a list of s2polygons
+//'
+//' this function is equivalent to \link[sf]{st_area}, in that it
+//' returns a numeric vector with polygon areas
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_area
+//' @details the area is on the unit sphere, in [0, 4 * pi]
+//' @export S2Polygons_area
+//[[Rcpp::export]]
+NumericVector S2Polygons_area(List x) {
+  NumericVector rslt(x.size());
+  S2Polygon s2poly;
+  for (size_t i = 0; i < x.size(); i++) {
+    S2PolygonInitFromR(x[i], s2poly);
+    rslt[i] = s2poly.GetArea();
+  }
+  return rslt;
+}
+
 //[[Rcpp::export]]
 LogicalVector S2Polygon_contains_point(NumericMatrix points, List poly,
                                        bool approx = true){

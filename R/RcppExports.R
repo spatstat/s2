@@ -9,11 +9,11 @@
 #' @param height Single numeric representing the height of the cap.
 #' @export S2CapFromAxisHeight
 S2CapFromAxisHeight <- function(axis, height) {
-    .Call('s2_S2CapFromAxisHeight', PACKAGE = 's2', axis, height)
+    .Call(`_s2_S2CapFromAxisHeight`, axis, height)
 }
 
 S2Cap_contains_point <- function(points, cap) {
-    .Call('s2_S2Cap_contains_point', PACKAGE = 's2', points, cap)
+    .Call(`_s2_S2Cap_contains_point`, points, cap)
 }
 
 #' Area of s2cap
@@ -23,7 +23,7 @@ S2Cap_contains_point <- function(points, cap) {
 #' @param cap Named list containing axis and height of cap.
 #' @export S2Cap_area
 S2Cap_area <- function(cap) {
-    .Call('s2_S2Cap_area', PACKAGE = 's2', cap)
+    .Call(`_s2_S2Cap_area`, cap)
 }
 
 #' Bounding latitude and longitude rectangle for spherical cap
@@ -33,7 +33,7 @@ S2Cap_area <- function(cap) {
 #' @param x cap
 #' @export
 S2Cap_GetRectBound <- function(x) {
-    .Call('s2_S2Cap_GetRectBound', PACKAGE = 's2', x)
+    .Call(`_s2_S2Cap_GetRectBound`, x)
 }
 
 #' Make a Vector of S2CellIds From Points on the Sphere
@@ -47,7 +47,7 @@ S2Cap_GetRectBound <- function(x) {
 #' @return An object of class `S2CellId`.
 #' @export S2CellIdFromPoint
 S2CellIdFromPoint <- function(x, level = 30L) {
-    .Call('s2_S2CellIdFromPoint', PACKAGE = 's2', x, level)
+    .Call(`_s2_S2CellIdFromPoint`, x, level)
 }
 
 #' Convert S2CellId to a S2Point
@@ -58,7 +58,7 @@ S2CellIdFromPoint <- function(x, level = 30L) {
 #' @return Three-column matrix reprensenting the points..
 #' @export S2CellId_ToPoint
 S2CellId_ToPoint <- function(x) {
-    .Call('s2_S2CellId_ToPoint', PACKAGE = 's2', x)
+    .Call(`_s2_S2CellId_ToPoint`, x)
 }
 
 #' Make a vector of S2CellId strings
@@ -69,23 +69,23 @@ S2CellId_ToPoint <- function(x) {
 #' @return A character vector with S2CellId strings.
 #' @export S2CellId_ToString
 S2CellId_ToString <- function(x) {
-    .Call('s2_S2CellId_ToString', PACKAGE = 's2', x)
+    .Call(`_s2_S2CellId_ToString`, x)
 }
 
 S2Cell_vertices_from_token <- function(tokens) {
-    .Call('s2_S2Cell_vertices_from_token', PACKAGE = 's2', tokens)
+    .Call(`_s2_S2Cell_vertices_from_token`, tokens)
 }
 
 S2Cell_vertices_from_point <- function(mat, level) {
-    .Call('s2_S2Cell_vertices_from_point', PACKAGE = 's2', mat, level)
+    .Call(`_s2_S2Cell_vertices_from_point`, mat, level)
 }
 
 S2Cell_grid_centers <- function(level) {
-    .Call('s2_S2Cell_grid_centers', PACKAGE = 's2', level)
+    .Call(`_s2_S2Cell_grid_centers`, level)
 }
 
 S2Covering_internal <- function(x, type, max_cells, min_level, max_level, interior) {
-    .Call('s2_S2Covering_internal', PACKAGE = 's2', x, type, max_cells, min_level, max_level, interior)
+    .Call(`_s2_S2Covering_internal`, x, type, max_cells, min_level, max_level, interior)
 }
 
 #' Create a rectangle of latitude and longitude on the sphere
@@ -96,7 +96,7 @@ S2Covering_internal <- function(x, type, max_cells, min_level, max_level, interi
 #' @param hi Latitude and longitude (in that order) in degrees of upper right corner.
 #' @export S2LatLngRect
 S2LatLngRect <- function(lo, hi) {
-    .Call('s2_S2LatLngRect', PACKAGE = 's2', lo, hi)
+    .Call(`_s2_S2LatLngRect`, lo, hi)
 }
 
 #' Area of s2latlngrect
@@ -106,7 +106,7 @@ S2LatLngRect <- function(lo, hi) {
 #' @param x Named list containing axis and height of cap.
 #' @export S2LatLngRect_area
 S2LatLngRect_area <- function(x) {
-    .Call('s2_S2LatLngRect_area', PACKAGE = 's2', x)
+    .Call(`_s2_S2LatLngRect_area`, x)
 }
 
 #' Interpolation of points on unit sphere
@@ -118,11 +118,11 @@ S2LatLngRect_area <- function(x) {
 #' correspond to no interpolation.
 #' @export S2Point_interpolate
 S2Point_interpolate <- function(x, eps) {
-    .Call('s2_S2Point_interpolate', PACKAGE = 's2', x, eps)
+    .Call(`_s2_S2Point_interpolate`, x, eps)
 }
 
 S2PolygonBuild <- function(x, validate = TRUE, xor_edges = TRUE, vertex_merge_radius = 0, edge_splice_fraction = 0.866, undirected_edges = FALSE) {
-    .Call('s2_S2PolygonBuild', PACKAGE = 's2', x, validate, xor_edges, vertex_merge_radius, edge_splice_fraction, undirected_edges)
+    .Call(`_s2_S2PolygonBuild`, x, validate, xor_edges, vertex_merge_radius, edge_splice_fraction, undirected_edges)
 }
 
 #' Union and intersection of two s2polygons
@@ -138,16 +138,67 @@ S2PolygonBuild <- function(x, validate = TRUE, xor_edges = TRUE, vertex_merge_ra
 #' @aliases S2Polygon_intersection
 #' @export S2Polygon_union
 S2Polygon_union <- function(x, y) {
-    .Call('s2_S2Polygon_union', PACKAGE = 's2', x, y)
+    .Call(`_s2_S2Polygon_union`, x, y)
 }
 
 #' @export S2Polygon_intersection
 S2Polygon_intersection <- function(x, y) {
-    .Call('s2_S2Polygon_intersection', PACKAGE = 's2', x, y)
+    .Call(`_s2_S2Polygon_intersection`, x, y)
+}
+
+#' intersection of sets of s2polygons
+#'
+#' this function generalizes S2Polygon_intersection, by allowing two lists of
+#' polygons, each list element equal to a polygon of that function.
+#' 
+#' @param x List of list of loops represented by three-column matrices.
+#' @param y List of list of loops represented by three-column matrices.
+#' @aliases S2Polygons_intersection
+#' @export S2Polygons_intersection
+S2Polygons_intersection <- function(x, y) {
+    .Call(`_s2_S2Polygons_intersection`, x, y)
+}
+
+#' for two sets of s2polygons, which ones intersect?
+#'
+#' this function is equivalent to \link[sf]{st_intersects}, in that it
+#' returns a sparse matrix with indexes for pairs of intersecting polygons
+#' 
+#' @param x List of list of loops represented by three-column matrices.
+#' @param y List of list of loops represented by three-column matrices.
+#' @aliases S2Polygons_intersect
+#' @export S2Polygons_intersect
+S2Polygons_intersect <- function(x, y) {
+    .Call(`_s2_S2Polygons_intersect`, x, y)
+}
+
+#' compute centroids for a list of s2polygons
+#'
+#' this function is equivalent to \link[sf]{st_centroid}, in that it
+#' returns a numeric vector with polygon centroids
+#' 
+#' @param x List of list of loops represented by three-column matrices.
+#' @aliases S2Polygons_centroid
+#' @export S2Polygons_centroid
+S2Polygons_centroid <- function(x) {
+    .Call(`_s2_S2Polygons_centroid`, x)
+}
+
+#' compute areas for a list of s2polygons
+#'
+#' this function is equivalent to \link[sf]{st_area}, in that it
+#' returns a numeric vector with polygon areas
+#' 
+#' @param x List of list of loops represented by three-column matrices.
+#' @aliases S2Polygons_area
+#' @details the area is on the unit sphere, in [0, 4 * pi]
+#' @export S2Polygons_area
+S2Polygons_area <- function(x) {
+    .Call(`_s2_S2Polygons_area`, x)
 }
 
 S2Polygon_contains_point <- function(points, poly, approx = TRUE) {
-    .Call('s2_S2Polygon_contains_point', PACKAGE = 's2', points, poly, approx)
+    .Call(`_s2_S2Polygon_contains_point`, points, poly, approx)
 }
 
 #' Distance from points to line on sphere
@@ -159,6 +210,6 @@ S2Polygon_contains_point <- function(points, poly, approx = TRUE) {
 #' @param x Points represented by three-column matrices.
 #' @export S2Polyline_dist
 S2Polyline_dist <- function(line, x) {
-    .Call('s2_S2Polyline_dist', PACKAGE = 's2', line, x)
+    .Call(`_s2_S2Polyline_dist`, line, x)
 }
 
