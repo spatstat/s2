@@ -150,6 +150,14 @@ List S2Polygon_intersection(List x, List y){
   return S2PolygonWrapForR(poly12);
 }
 
+//' intersection of sets of s2polygons
+//'
+//' this function generalizes S2Polygon_intersection, by allowing two lists of
+//' polygons, each list element equal to a polygon of that function.
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @param y List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_intersection
 //' @export S2Polygons_intersection
 //[[Rcpp::export]]
 List S2Polygons_intersection(List x, List y){
@@ -176,6 +184,14 @@ List S2Polygons_intersection(List x, List y){
   return rslt;
 }
 
+//' for two sets of s2polygons, which ones intersect?
+//'
+//' this function is equivalent to \link[sf]{st_intersects}, in that it
+//' returns a sparse matrix with indexes for pairs of intersecting polygons
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @param y List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_intersect
 //' @export S2Polygons_intersect
 //[[Rcpp::export]]
 List S2Polygons_intersect(List x, List y) {
@@ -197,6 +213,13 @@ List S2Polygons_intersect(List x, List y) {
   return rslt;
 }
 
+//' compute centroids for a list of s2polygons
+//'
+//' this function is equivalent to \link[sf]{st_centroid}, in that it
+//' returns a numeric vector with polygon centroids
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_centroid
 //' @export S2Polygons_centroid
 //[[Rcpp::export]]
 NumericMatrix S2Polygons_centroid(List x) {
@@ -209,7 +232,14 @@ NumericMatrix S2Polygons_centroid(List x) {
   return S2PointVecToR(points);
 }
 
-// area in [0, 4 * pi]
+//' compute areas for a list of s2polygons
+//'
+//' this function is equivalent to \link[sf]{st_area}, in that it
+//' returns a numeric vector with polygon areas
+//' 
+//' @param x List of list of loops represented by three-column matrices.
+//' @aliases S2Polygons_area
+//' @details the area is on the unit sphere, in [0, 4 * pi]
 //' @export S2Polygons_area
 //[[Rcpp::export]]
 NumericVector S2Polygons_area(List x) {
