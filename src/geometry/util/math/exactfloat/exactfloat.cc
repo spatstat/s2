@@ -2,7 +2,7 @@
 
 #include "base/logging.h"
 #include "base/integral_types.h"
-#include "exactfloat.h"
+#include "util/math/exactfloat/exactfloat.h"
 #include <cstring>
 
 #include <openssl/crypto.h>
@@ -14,8 +14,8 @@ using std::ceil;
 using std::copysign;
 using std::fabs;
 using std::frexp;
-using std::isinf;
-using std::isnan;
+// using std::isinf;
+// using std::isnan;
 using std::ldexp;
 using std::max;
 using std::min;
