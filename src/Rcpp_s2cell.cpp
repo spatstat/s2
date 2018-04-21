@@ -17,7 +17,7 @@ std::vector<S2CellId> S2CellId_FromS2Point(std::vector<S2Point> x, IntegerVector
   int nlev = level.size();
   int lev = level[0];
   std::vector<S2CellId> rslt(n);
-  if(nlev == 1 & lev == 30){
+  if(nlev == 1 && lev == 30){
     // Default case of single level == 30
     for(int i=0; i<n; i++){
       rslt[i] = S2CellId::FromPoint(x[i]);
@@ -160,7 +160,7 @@ List S2Cell_vertices_from_point(NumericMatrix mat, int level){
 
 //[[Rcpp::export]]
 NumericMatrix S2Cell_grid_centers(int level){
-  if(level<0 | level>9){
+  if(level<0 || level>9){
     stop("The level must be non-negative and not more than 9 for now...");
   }
   long n = 6*pow(4,level);
