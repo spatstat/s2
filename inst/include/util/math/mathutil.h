@@ -34,13 +34,6 @@ inline T sgn(const T x) {
 
 // ========================================================================= //
 
-// https://github.com/mongodb/mongo/commit/3fe2d4fb37cce8259991f7af8b58d67b357af84e
-// Disable error about fabs causing truncation of value because
-// it takes a double instead of a long double (Clang 3.5)
-// See SERVER-15183
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wabsolute-value"
-
 class MathUtil {
  public:
 
@@ -113,8 +106,8 @@ class MathUtil {
     // Discriminants below kTolerance in absolute value are considered zero
     // because changing the final bit of one of the inputs can change the
     // sign of the discriminant.
-    const double kTolerance = epsilon * max(fabs(2 * b * b), fabs(4 * a * c));
-    return (fabs(discriminant) <= kTolerance);
+    const double kTolerance = epsilon * max(std::abs(2 * b * b), std::abs(4 * a * c));
+    return (std::abs(discriminant) <= kTolerance);
   }
 
   // Returns in *r1 and *r2 the roots of a "normal" quadratic equation
@@ -717,7 +710,5 @@ bool MathUtil::WithinFractionOrMargin(const T x, const T y,
            (AbsDiff(x, y) <= Max(margin, fraction * Max(Abs(x), Abs(y))));
   }
 }
-
-#pragma clang diagnostic pop
 
 #endif  // UTIL_MATH_MATHUTIL_H__
