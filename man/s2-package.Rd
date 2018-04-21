@@ -32,6 +32,7 @@ Useful links:
 Authors:
 \itemize{
   \item Jeroen Ooms \email{jeroen.ooms@stat.ucla.edu} (configure and cleanup script)
+  \item Edzer Pebesma \email{edzer.pebesma@uni-muenster.de} (Interface to sf)
 }
 
 Other contributors:
