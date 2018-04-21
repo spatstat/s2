@@ -16,3 +16,8 @@ points are handled and they must be specified as a three-column matrix.}
 Test whether the given object(s) on the sphere are contained in a cap. At the
 moment only point containment can be tested.
 }
+\examples{
+cap <- list(axis = c(0,1,0), height = 0.1)
+S2Cap_Contains(cap, matrix(c(0,1,0),ncol=3))
+S2Cap_Contains(cap, matrix(c(1,0,0),ncol=3))
+}
