@@ -7,7 +7,7 @@
 \title{s2: Google's S2 Library for Geometry on the Sphere}
 \description{
 R bindings for Google's s2 library for geometric calculations on
-the sphere.
+    the sphere.
 }
 \details{
 This package aims at providing bindings for the C++ library s2 for geometry

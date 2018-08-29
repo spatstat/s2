@@ -4,8 +4,9 @@
 \alias{S2Polygon}
 \title{Construct a S2Polygon}
 \usage{
-S2Polygon(x, validate = TRUE, xor_edges = TRUE, vertex_merge_radius = 0,
-  edge_splice_fraction = 0.866, undirected_edges = FALSE)
+S2Polygon(x, validate = TRUE, xor_edges = TRUE,
+  vertex_merge_radius = 0, edge_splice_fraction = 0.866,
+  undirected_edges = FALSE)
 }
 \arguments{
 \item{x}{Input to construct the polygon from. At the moment the only valid
