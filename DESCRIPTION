@@ -1,7 +1,7 @@
 Package: s2
 Type: Package
 Title: Google's S2 Library for Geometry on the Sphere
-Version: 0.4-0
+Version: 0.4-1
 Authors@R: c(
     person('Ege', 'Rubak', email='rubak@math.aau.dk', role = c('aut', 'cre')),
     person("Jeroen", "Ooms", , "jeroen.ooms@stat.ucla.edu", role = "aut", comment = "configure and cleanup script"),
@@ -19,4 +19,4 @@ URL: https://github.com/spatstat/s2,
 SystemRequirements: OpenSSL >= 1.0.0, C++11
 LinkingTo: Rcpp
 NeedsCompilation: yes
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0

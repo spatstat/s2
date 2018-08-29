@@ -116,7 +116,7 @@ S2RegionCoverer::Candidate* S2RegionCoverer::NewCandidate(S2Cell const& cell) {
     size += sizeof(Candidate*) << max_children_shift();
   }
   Candidate* candidate = static_cast<Candidate*>(malloc(size));
-  memset(candidate, 0, size);
+  memset(static_cast<void*>(candidate), 0, size);
   candidate->cell = cell;
   candidate->is_terminal = is_terminal;
   ++candidates_created_counter_;
