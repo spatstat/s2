@@ -281,6 +281,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// S2Cell_random_points_from_token
+Rcpp::List S2Cell_random_points_from_token(std::vector<std::string> tokens, Rcpp::IntegerVector n_points, int giveup);
+RcppExport SEXP _s2_S2Cell_random_points_from_token(SEXP tokensSEXP, SEXP n_pointsSEXP, SEXP giveupSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type tokens(tokensSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type n_points(n_pointsSEXP);
+    Rcpp::traits::input_parameter< int >::type giveup(giveupSEXP);
+    rcpp_result_gen = Rcpp::wrap(S2Cell_random_points_from_token(tokens, n_points, giveup));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_s2_S2CapFromAxisHeight", (DL_FUNC) &_s2_S2CapFromAxisHeight, 2},
@@ -306,6 +319,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_s2_S2Polygons_area", (DL_FUNC) &_s2_S2Polygons_area, 1},
     {"_s2_S2Polygon_contains_point", (DL_FUNC) &_s2_S2Polygon_contains_point, 3},
     {"_s2_S2Polyline_dist", (DL_FUNC) &_s2_S2Polyline_dist, 2},
+    {"_s2_S2Cell_random_points_from_token", (DL_FUNC) &_s2_S2Cell_random_points_from_token, 3},
     {NULL, NULL, 0}
 };
 

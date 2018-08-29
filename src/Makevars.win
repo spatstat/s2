@@ -51,6 +51,7 @@ OBJECTS_RCPP= \
   Rcpp_s2latlngrect.o \
   Rcpp_s2point.o \
   Rcpp_s2polygon.o \
+  Rcpp_s2random.o \
   RcppExports.o
 
 OBJECTS= $(OBJECTS_S2UTIL) $(OBJECTS_S2CELLID) $(OBJECTS_S2) $(OBJECTS_RCPP)

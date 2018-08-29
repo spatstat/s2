@@ -213,3 +213,7 @@ S2Polyline_dist <- function(line, x) {
     .Call(`_s2_S2Polyline_dist`, line, x)
 }
 
+S2Cell_random_points_from_token <- function(tokens, n_points, giveup) {
+    .Call(`_s2_S2Cell_random_points_from_token`, tokens, n_points, giveup)
+}
+
