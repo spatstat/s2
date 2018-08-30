@@ -4,6 +4,29 @@
 #include <s2/s2cellid.h>
 #include <s2/s2cell.h>
 #include <s2/s2latlngrect.h>
+#include <util/math/matrix3x3-inl.h>
+
+// Uniform samplers on either Cap or LatLngRect based on Google's testing examples.
+S2Point SamplePoint(const S2Cap& cap) {
+  // We consider the cap axis to be the "z" axis.  We choose two other axes to
+  // complete the coordinate frame.
+  
+  Matrix3x3_d m;
+  S2::GetFrame(cap.axis(), &m);
+  
+  // The surface area of a spherical cap is directly proportional to its
+  // height.  First we choose a random height, and then we choose a random
+  // point along the circle at that height.
+  
+  double h = Rcpp::runif(1)[0] * cap.height();
+  double theta = 2 * M_PI * Rcpp::runif(1)[0];
+  double r = sqrt(h * (2 - h));  // Radius of circle.
+  
+  // The result should already be very close to unit-length, but we might as
+  // well make it accurate as possible.
+  return S2::FromFrame(m, S2Point(cos(theta) * r, sin(theta) * r, 1 - h))
+    .Normalize();
+}
 
 S2Point SamplePoint(const S2LatLngRect& rect) {
   double lng = rect.lng().lo() + Rcpp::runif(1)[0] * rect.lng().GetLength();
@@ -19,11 +42,13 @@ Rcpp::List S2Cell_random_points_from_id(std::vector<S2CellId> cellids,
   for(int i=0; i<n; i++){
     S2Cell cell(cellids[i]);
     const S2LatLngRect rect = cell.GetRectBound();
+    // const S2Cap cap = cell.GetCapBound();
     int j = 0;
     Rcpp::NumericMatrix points_i(n_points[i], 3);
     int n_tries = 0;
     while(j<n_points[i] && n_tries < giveup){
       const auto p = SamplePoint(rect);
+      // const auto p = SamplePoint(cap);
       if(cell.Contains(p)){
         points_i(j, 0) = p.x();
         points_i(j, 1) = p.y();
@@ -55,7 +80,7 @@ std::vector<S2CellId> R_S2CellIdFromTokens(std::vector<std::string> tokens);
 //[[Rcpp::export]]
 Rcpp::List S2Cell_random_points_from_token(std::vector<std::string> tokens,
                                            Rcpp::IntegerVector n_points,
-                                           int giveup){
+                                           int giveup = 10000){
   auto cellids = R_S2CellIdFromTokens(tokens);
   return S2Cell_random_points_from_id(cellids, n_points, giveup);
 }
