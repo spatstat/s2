@@ -29,7 +29,11 @@ char* const DateLogger::HumanDate() {
 #else
   time_t time_value = time(NULL);
   struct tm now;
+#ifdef _WIN32
+  localtime_s(&now, &time_value);
+#else
   localtime_r(&time_value, &now);
+#endif
   snprintf(buffer_, sizeof(buffer_), "%02d:%02d:%02d",
            now.tm_hour, now.tm_min, now.tm_sec);
 #endif
